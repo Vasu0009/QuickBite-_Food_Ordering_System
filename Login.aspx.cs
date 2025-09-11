@@ -45,7 +45,7 @@ namespace QuickBite__Food_Ordering_System
                 {
                     Session["user"] = txteml.Text;
                     Label1.Text = "Login Successful";
-                    //Response.Redirect("Home.aspx");
+                    Response.Redirect("Home.aspx");
                 }
             }
             else

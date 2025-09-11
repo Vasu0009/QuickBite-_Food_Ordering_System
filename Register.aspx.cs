@@ -52,6 +52,7 @@ namespace QuickBite__Food_Ordering_System
                 cmd = new SqlCommand("insert into register_tbl(First_Name,Last_Name,Email_Address,Phone_Number,Delivery_Address,Password)" + " values('" + txtfnm.Text + "','" + txtlnm.Text + "','" + txteml.Text + "','" + txtphone.Text + "','" + txtadd.Text + "','" + txtpwd.Text + "')", con);
                 cmd.ExecuteNonQuery();
                 lblMessage.Text = "Registration Successful";
+               // Response.Redirect("Login.aspx");
                 clear();
                
             }

@@ -48,7 +48,7 @@
             </div>
         </div>
     </footer>
-    <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Function to toggle password visibility
         function togglePasswordVisibility() {
@@ -239,9 +239,9 @@
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-    </script>--%>
+    </script>
 
-    <%-- <!-- Cart Modal -->
+     <!-- Cart Modal -->
             <div class="modal fade" id="cartModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content border-0 shadow-lg">
@@ -281,7 +281,7 @@
                         </div>
                     </div>
                 </div>
-</div>--%>
+</div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
@@ -385,8 +385,8 @@
                                     <span class="btn-loading" style="display: none;">
                                         <span class="loading-spinner me-2"></span>Signing in...
                                     </span>--%>
-                                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                                <asp:Label ID="lblMessage" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="lblMessage" runat="server" Text="" Style="color: forestgreen; text-align: center"></asp:Label>
 
 
                                 <div class="text-center">
