@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace QuickBite__Food_Ordering_System.Admin
+namespace QuickBite__Food_Ordering_System
 {
-    public partial class admin : System.Web.UI.MasterPage
+    public partial class Menu : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

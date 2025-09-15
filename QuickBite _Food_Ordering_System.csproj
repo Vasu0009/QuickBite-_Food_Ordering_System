@@ -68,6 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="Admin\Add_Categories.aspx" />
+    <Content Include="Admin\Add_Menu.aspx" />
+    <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\LoginAdminaspx.aspx" />
+    <Content Include="Admin\Orders.aspx" />
+    <Content Include="Admin\Reports.aspx" />
+    <Content Include="Admin\Settings.aspx" />
+    <Content Include="Admin\Users.aspx" />
     <Content Include="App_Data\User.mdf" />
     <Content Include="App_Data\User_log.ldf">
       <DependentUpon>User.mdf</DependentUpon>
@@ -101,8 +109,10 @@
     <Content Include="assets\images\restaurant.jpg" />
     <Content Include="Cart.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="css\admin.css" />
     <Content Include="css\style.css" />
     <Content Include="Home.aspx" />
+    <Content Include="js\admin.js" />
     <Content Include="js\auth.js" />
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />
@@ -118,12 +128,68 @@
     <Compile Include="About.aspx.designer.cs">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Admin.Master.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
+    <Compile Include="Admin\Add_Categories.aspx.cs">
+      <DependentUpon>Add_Categories.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\Admin.Master.designer.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
+    <Compile Include="Admin\Add_Categories.aspx.designer.cs">
+      <DependentUpon>Add_Categories.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Add_Menu.aspx.cs">
+      <DependentUpon>Add_Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Add_Menu.aspx.designer.cs">
+      <DependentUpon>Add_Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LoginAdminaspx.aspx.cs">
+      <DependentUpon>LoginAdminaspx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LoginAdminaspx.aspx.designer.cs">
+      <DependentUpon>LoginAdminaspx.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Settings.aspx.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Settings.aspx.designer.cs">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cart.aspx.cs">
       <DependentUpon>Cart.aspx</DependentUpon>
@@ -177,7 +243,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin\Admin.Master" />
+    <Content Include="Admin\admin.Master" />
     <None Include="packages.config" />
     <Content Include="QuickBite.Master" />
     <None Include="Web.Debug.config">
@@ -187,7 +253,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Admin\images\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

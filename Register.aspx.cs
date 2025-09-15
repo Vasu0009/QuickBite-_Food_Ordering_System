@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 
+
 namespace QuickBite__Food_Ordering_System
 {
     public partial class Register : System.Web.UI.Page

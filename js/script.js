@@ -72,21 +72,13 @@ function setupEventListeners() {
         filter.addEventListener('click', filterMenuItems);
     });
 
-    // Cart modal events
-    const cartModal = document.getElementById('cartModal');
-    if (cartModal) {
-        cartModal.addEventListener('show.bs.modal', updateCartDisplay);
-    }
+    // Cart display update (no modal needed)
+    // Cart will be displayed on cart.html page
 }
 
-// Add item to cart
+// Add item to cart (no login required)
 function addToCart(name, price, image) {
-    // Check if user is logged in before adding to cart
-    if (!isUserLoggedIn()) {
-        console.log('User not logged in, showing cute notification for add to cart');
-        showCuteLoginNotification('cart');
-        return;
-    }
+    console.log('Adding item to cart:', name, price);
     
     const existingItem = cart.find(item => item.name === name);
     
@@ -115,14 +107,17 @@ function calculateCartTotal() {
 // Update cart display
 function updateCartDisplay() {
     const cartCount = document.getElementById('cart-count');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotalElement = document.getElementById('cart-total');
-    const cartEmpty = document.getElementById('cart-empty');
     
+    // Update cart count in navigation
     if (cartCount) {
         const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
         cartCount.textContent = totalItems;
     }
+
+    // Handle cart page elements if on cart page
+    const cartItems = document.getElementById('cart-items');
+    const cartTotalElement = document.getElementById('cart-total');
+    const cartEmpty = document.getElementById('cart-empty');
     
     if (cartTotalElement) {
         cartTotalElement.textContent = cartTotal.toLocaleString('en-IN');
@@ -151,6 +146,7 @@ function updateCartDisplay() {
         totalSummaryEl.textContent = grandTotal.toLocaleString('en-IN');
     }
     
+    // Handle cart items display if on cart page
     if (cartItems && cartEmpty) {
         if (cart.length === 0) {
             cartItems.style.display = 'none';
@@ -297,9 +293,9 @@ function checkout() {
     
     // Check if user is logged in
     if (!isUserLoggedIn()) {
-        console.log('User not logged in, showing cute notification');
-        // Show cute login notification
-        showCuteLoginNotification('checkout');
+        console.log('User not logged in, showing guest checkout option');
+        // Show guest checkout modal or redirect to login
+        showGuestCheckoutModal();
         return;
     }
     
@@ -308,17 +304,92 @@ function checkout() {
     proceedWithCheckout();
 }
 
+// Show guest checkout modal
+function showGuestCheckoutModal() {
+    const guestModal = document.createElement('div');
+    guestModal.className = 'modal fade';
+    guestModal.id = 'guestCheckoutModal';
+    guestModal.innerHTML = `
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header border-0 pb-0">
+                    <div class="w-100 text-center">
+                        <div class="guest-checkout-icon mb-3">
+                            <i class="bi bi-cart-check-fill text-warning"></i>
+                        </div>
+                        <h4 class="modal-title fw-bold text-dark">Complete Your Order</h4>
+                    </div>
+                </div>
+                <div class="modal-body text-center px-4 pb-4">
+                    <p class="text-muted mb-4">You can checkout as a guest or login for a better experience!</p>
+                    
+                    <div class="d-grid gap-3">
+                        <button type="button" class="btn btn-warning btn-lg py-3 fw-bold" onclick="proceedAsGuest()">
+                            <i class="bi bi-person me-2"></i>Checkout as Guest
+                        </button>
+                        <button type="button" class="btn btn-outline-warning btn-lg py-3 fw-bold" onclick="redirectToLogin()">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Login for Better Experience
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(guestModal);
+    const modal = new bootstrap.Modal(guestModal);
+    modal.show();
+    
+    // Remove modal from DOM when closed
+    guestModal.addEventListener('hidden.bs.modal', function() {
+        guestModal.remove();
+    });
+}
+
+// Proceed as guest
+function proceedAsGuest() {
+    // Close guest modal
+    const guestModal = document.getElementById('guestCheckoutModal');
+    if (guestModal) {
+        const modal = bootstrap.Modal.getInstance(guestModal);
+        if (modal) {
+            modal.hide();
+        }
+    }
+    
+    // Proceed with checkout
+    proceedWithCheckout();
+}
+
+// Redirect to login
+function redirectToLogin() {
+    // Close guest modal
+    const guestModal = document.getElementById('guestCheckoutModal');
+    if (guestModal) {
+        const modal = bootstrap.Modal.getInstance(guestModal);
+        if (modal) {
+            modal.hide();
+        }
+    }
+    
+    // Redirect to login page
+    window.location.href = 'login.html';
+}
+
 // Proceed with checkout for logged-in users
 function proceedWithCheckout() {
-    // Show checkout modal if present
+    // Show checkout modal if present (for cart page)
     const checkoutModalEl = document.getElementById('checkoutModal');
     if (checkoutModalEl) {
         const checkoutModal = new bootstrap.Modal(checkoutModalEl);
         checkoutModal.show();
+    } else {
+        // If no checkout modal, proceed directly to order confirmation
+        showOrderConfirmationModal();
     }
-    
-    // Create modern order confirmation modal
-    showOrderConfirmationModal();
 }
 
 // Show modern order confirmation modal
@@ -385,6 +456,12 @@ function showOrderConfirmationModal() {
                                 </div>
                             </div>
                         </div>
+                        ${!isUserLoggedIn() ? `
+                            <div class="alert alert-info mt-3 mb-0">
+                                <i class="bi bi-info-circle me-2"></i>
+                                <small>Guest checkout completed! Create an account to track your orders and enjoy exclusive benefits.</small>
+                            </div>
+                        ` : ''}
                     </div>
                     
                     <div class="d-grid gap-2">
@@ -406,15 +483,6 @@ function showOrderConfirmationModal() {
     calculateCartTotal();
     saveCartToStorage();
     updateCartDisplay();
-    
-    // Close cart modal if present
-    const cartModalEl = document.getElementById('cartModal');
-    if (cartModalEl) {
-        const cartModal = bootstrap.Modal.getInstance(cartModalEl);
-        if (cartModal) {
-            cartModal.hide();
-        }
-    }
 }
 
 // Close order confirmation modal
@@ -765,36 +833,36 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-//// Cute notification functions
-//function showCuteLoginNotification(type = 'cart') {
-//    const notification = document.getElementById('cuteLoginNotification');
-//    if (!notification) return;
+// Cute notification functions
+function showCuteLoginNotification(type = 'cart') {
+    const notification = document.getElementById('cuteLoginNotification');
+    if (!notification) return;
     
-//    // Update notification content based on type
-//    const title = notification.querySelector('.notification-title');
-//    const message = notification.querySelector('.notification-message');
-//    const icon = notification.querySelector('.notification-icon i');
+    // Update notification content based on type
+    const title = notification.querySelector('.notification-title');
+    const message = notification.querySelector('.notification-message');
+    const icon = notification.querySelector('.notification-icon i');
     
-//    if (type === 'checkout') {
-//        title.textContent = 'Almost there! 🛒';
-//        message.textContent = 'Please login first to complete your order and enjoy exclusive benefits!';
-//        icon.className = 'bi bi-cart-check-fill';
-//        notification.classList.add('checkout-notification');
-//    } else {
-//        title.textContent = 'Hey there! 👋';
-//        message.textContent = 'Please login first to add items to your cart and enjoy a personalized shopping experience!';
-//        icon.className = 'bi bi-heart-fill';
-//        notification.classList.remove('checkout-notification');
-//    }
+    if (type === 'checkout') {
+        title.textContent = 'Almost there! 🛒';
+        message.textContent = 'Please login first to complete your order and enjoy exclusive benefits!';
+        icon.className = 'bi bi-cart-check-fill';
+        notification.classList.add('checkout-notification');
+    } else {
+        title.textContent = 'Hey there! 👋';
+        message.textContent = 'Please login first to add items to your cart and enjoy a personalized shopping experience!';
+        icon.className = 'bi bi-heart-fill';
+        notification.classList.remove('checkout-notification');
+    }
     
-//    // Show notification
-//    notification.style.display = 'block';
+    // Show notification
+    notification.style.display = 'block';
     
-//    // Auto hide after 5 seconds
-//    setTimeout(() => {
-//        hideCuteNotification();
-//    }, 5000);
-//}
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+        hideCuteNotification();
+    }, 5000);
+}
 
 function hideCuteNotification() {
     const notification = document.getElementById('cuteLoginNotification');
@@ -834,4 +902,7 @@ window.isUserLoggedIn = isUserLoggedIn;
 window.showCuteLoginNotification = showCuteLoginNotification;
 window.hideCuteNotification = hideCuteNotification;
 window.searchMenuItems = searchMenuItems;
-window.clearSearch = clearSearch; 
+window.clearSearch = clearSearch;
+window.showGuestCheckoutModal = showGuestCheckoutModal;
+window.proceedAsGuest = proceedAsGuest;
+window.redirectToLogin = redirectToLogin; 

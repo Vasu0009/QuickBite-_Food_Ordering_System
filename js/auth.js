@@ -1,4 +1,3 @@
-
 // Enhanced Authentication System for QuickBite
 // Professional user management with profile functionality
 
@@ -403,8 +402,8 @@ function logout() {
         
         // Redirect to home page after a short delay
         setTimeout(() => {
-            if (window.location.pathname !== '/Home.aspx' && window.location.pathname !== '/') {
-                window.location.href = 'Home.aspx';
+            if (window.location.pathname !== '/index.html' && window.location.pathname !== '/') {
+                window.location.href = 'index.html';
             }
         }, 1000);
     }
