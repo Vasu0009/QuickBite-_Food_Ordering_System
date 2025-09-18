@@ -29,7 +29,7 @@
                 <main class="col-md-9 col-lg-10 ms-sm-auto px-4 py-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h4 mb-0">Menu Items</h1>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal" onclick="clearForm()">
                             <i class="bi bi-plus-circle me-1"></i>Add Menu Item
                         </button>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <asp:GridView ID="gvMenuItems" runat="server" AutoGenerateColumns="False"
-                                    CssClass="table table-hover align-middle mb-0" DataKeyNames="Id">
+                                    CssClass="table table-hover align-middle mb-0" DataKeyNames="Id" OnRowCommand="gvMenuItems_RowCommand">
                                     <Columns>
                                         <asp:BoundField DataField="Id" HeaderText="ID" ReadOnly="true" />
                                         <asp:TemplateField HeaderText="Name">
@@ -61,11 +61,17 @@
 
                                         <asp:TemplateField HeaderText="Actions">
                                             <ItemTemplate>
-                                                <asp:Button ID="btnEdit" runat="server" Text="Edit" CssClass="btn btn-sm btn-outline-primary me-1"
-                                                    CommandArgument='<%# Eval("Id") %>' />
-                                                <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-sm btn-outline-danger"
-                                                    CommandArgument='<%# Eval("Id") %>'
-                                                    OnClientClick="return confirm('Are you sure you want to delete this menu item?');" />
+                                                <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-sm btn-outline-primary me-1"
+                                                    CommandArgument='<%# Eval("Id") %>' CommandName="cmd_edt"
+                                                    ToolTip="Edit">
+                                                     <i class="bi bi-pencil"></i>
+                                                </asp:LinkButton>
+                                                <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-sm btn-outline-danger"
+                                                    CommandArgument='<%# Eval("Id") %>' CommandName="cmd_dlt"
+                                                    OnClientClick="return confirm('Are you sure you want to delete this menu item?');"
+                                                    ToolTip="Delete">
+                                                    <i class="bi bi-trash"></i>
+                                                </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                     </Columns>
@@ -107,7 +113,9 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Image *</label>
-                                        <asp:FileUpload ID="fldimg" runat="server" CssClass="form-control" required />
+                                        <asp:FileUpload ID="fldimg" runat="server" CssClass="form-control" />
+                                        <small class="form-text text-muted">Leave empty to keep current image when editing</small>
+                                        <asp:HiddenField ID="hdnCurrentImage" runat="server" />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Description *</label>
@@ -139,6 +147,91 @@
                 var modal = bootstrap.Modal.getInstance(myModalEl);
                 modal.hide();
             }
+
+<%--            // Function to clear form when adding new item
+            function clearForm() {
+                document.getElementById('<%= hdnItemId.ClientID %>').value = "0";
+                document.getElementById('<%= txtName.ClientID %>').value = "";
+                document.getElementById('<%= txtPrice.ClientID %>').value = "";
+                document.getElementById('<%= txtDescription.ClientID %>').value = "";
+                document.getElementById('<%= fldimg.ClientID %>').value = "";
+                document.getElementById('<%= lblModalTitle.ClientID %>').innerText = "Add Menu Item";
+                document.getElementById('<%= btnSave.ClientID %>').innerText = "Save Item";
+                document.getElementById('<%= hdnCurrentImage.ClientID %>').value = "";
+
+                // Reset category dropdown
+                var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
+                if (categoryDropdown.options.length > 0) {
+                    categoryDropdown.selectedIndex = 0;
+                }
+            }
+
+            // Function to show modal when editing
+            function showEditModal(itemId) {
+                // Set the hidden field with the item ID
+                document.getElementById('<%= hdnItemId.ClientID %>').value = itemId;
+
+                // Make an AJAX call to get the item details
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "Add_Menu.aspx/GetMenuItem", true);
+                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var result = JSON.parse(xhr.responseText);
+                        if (result.d) {
+                            var item = result.d;
+
+                            // Populate the form fields
+                            document.getElementById('<%= txtName.ClientID %>').value = item.Name;
+                            document.getElementById('<%= txtPrice.ClientID %>').value = item.Price;
+                            document.getElementById('<%= txtDescription.ClientID %>').value = item.Description;
+                            document.getElementById('<%= hdnCurrentImage.ClientID %>').value = item.Image;
+
+                            // Set the category
+                            var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
+                            for (var i = 0; i < categoryDropdown.options.length; i++) {
+                                if (categoryDropdown.options[i].value == item.CategoryId) {
+                                    categoryDropdown.selectedIndex = i;
+                                    break;
+                                }
+                            }
+
+                            // Update modal title and button text
+                            document.getElementById('<%= lblModalTitle.ClientID %>').innerText = "Edit Menu Item";
+                            document.getElementById('<%= btnSave.ClientID %>').innerText = "Update Item";
+
+                            // Show the modal
+                            showModal();
+                        }
+                    }
+                };
+
+                xhr.send(JSON.stringify({ itemId: itemId }));
+            }
+
+            // Show modal if there's an error after postback
+            window.onload = function () {
+                <% if (ViewState["ShowModal"] != null && (bool)ViewState["ShowModal"])
+            { %>
+                showModal();
+                <% } %>
+            };--%>
+
+
+            // Function to show the modal
+            function showModal() {
+                var myModal = new bootstrap.Modal(document.getElementById('menuModal'));
+                myModal.show();
+            }
+
+            // Function to close the modal
+            function closeModal() {
+                var myModalEl = document.getElementById('menuModal');
+                var modal = bootstrap.Modal.getInstance(myModalEl);
+                modal.hide();
+            }
+
         </script>
     </body>
 </asp:Content>

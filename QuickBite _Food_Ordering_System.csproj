@@ -71,7 +71,7 @@
     <Content Include="Admin\Add_Categories.aspx" />
     <Content Include="Admin\Add_Menu.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
-    <Content Include="Admin\LoginAdminaspx.aspx" />
+    <Content Include="Admin\LoginAdmin.aspx" />
     <Content Include="Admin\Orders.aspx" />
     <Content Include="Admin\Reports.aspx" />
     <Content Include="Admin\Settings.aspx" />
@@ -80,7 +80,6 @@
     <Content Include="App_Data\User_log.ldf">
       <DependentUpon>User.mdf</DependentUpon>
     </Content>
-    <Content Include="assets\images\1.jpg" />
     <Content Include="assets\images\10.jpg" />
     <Content Include="assets\images\11.jpg" />
     <Content Include="assets\images\12.jpg" />
@@ -88,7 +87,6 @@
     <Content Include="assets\images\14.jpg" />
     <Content Include="assets\images\15.jpg" />
     <Content Include="assets\images\2.jpg" />
-    <Content Include="assets\images\3.jpg" />
     <Content Include="assets\images\4.jpg" />
     <Content Include="assets\images\5.jpg" />
     <Content Include="assets\images\6.jpg" />
@@ -156,12 +154,12 @@
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\LoginAdminaspx.aspx.cs">
-      <DependentUpon>LoginAdminaspx.aspx</DependentUpon>
+    <Compile Include="Admin\LoginAdmin.aspx.cs">
+      <DependentUpon>LoginAdmin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\LoginAdminaspx.aspx.designer.cs">
-      <DependentUpon>LoginAdminaspx.aspx</DependentUpon>
+    <Compile Include="Admin\LoginAdmin.aspx.designer.cs">
+      <DependentUpon>LoginAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Orders.aspx.cs">
       <DependentUpon>Orders.aspx</DependentUpon>

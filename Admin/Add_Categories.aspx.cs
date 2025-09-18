@@ -54,23 +54,74 @@ namespace QuickBite__Food_Ordering_System.Admin
             gvCategories.DataBind();
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        void selectCategory()
         {
             getcon();
+            int id = Convert.ToInt32(ViewState["CategoryId"]);
+            da = new SqlDataAdapter("SELECT * FROM Add_Category WHERE CategoryId=" + id, con);
+            ds = new DataSet();
+            da.Fill(ds);
 
-            cmd = new SqlCommand("INSERT INTO Add_Category (Name, Slug, Description) VALUES ('" + txtName.Text + "','" + txtSlug.Text + "','" + txtDescription.Text + "')", con);
-            cmd.ExecuteNonQuery();
-            Response.Write("<script>alert('Category added successfully.')</script>");
+            txtName.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+            txtSlug.Text = ds.Tables[0].Rows[0]["Slug"].ToString();
+            txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
+        }
 
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (btnSave.Text == "Save Category")
+            {
+                getcon();
+                cmd = new SqlCommand("INSERT INTO Add_Category (Name, Slug, Description) VALUES ('" + txtName.Text + "','" + txtSlug.Text + "','" + txtDescription.Text + "')", con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Category added successfully.')</script>");
 
-            BindCategories();
-            clear();
+                BindCategories();
+                clear();
+            }
+            else
+            {
+                getcon();
+                int id = Convert.ToInt32(ViewState["CategoryId"]);
+                cmd = new SqlCommand("UPDATE Add_Category SET Name='" + txtName.Text + "', Slug='" + txtSlug.Text + "', Description='" + txtDescription.Text + "' WHERE CategoryId=" + id, con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Category updated successfully.')</script>");
+                btnSave.Text = "Save Category";
+                lblModalTitle.Text = "Add Category";
+                BindCategories();
+                clear();
+            }
         }
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session["admin"] = null;
             Response.Redirect("LoginAdmin.aspx");
+        }
+
+        protected void gvCategories_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument.ToString());
+            if (e.CommandName == "cmd_edt")
+            {
+                ViewState["CategoryId"] = id;
+                selectCategory();
+                btnSave.Text = "Update Category";
+                lblModalTitle.Text = "Edit Category";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);
+
+
+
+
+            }
+            else if (e.CommandName == "cmd_dlt")
+            {
+                getcon();
+                cmd = new SqlCommand("DELETE FROM Add_Category WHERE CategoryId=" + id, con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Category deleted successfully.')</script>");
+                BindCategories();
+            }
         }
     }
 }

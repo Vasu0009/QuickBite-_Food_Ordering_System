@@ -17,7 +17,7 @@ namespace QuickBite__Food_Ordering_System.Admin
         SqlConnection con;
         SqlDataAdapter da;
         DataSet ds;
-        SqlCommand cmd;     
+        SqlCommand cmd;
         string fnm;
 
         void getcon()
@@ -67,6 +67,7 @@ namespace QuickBite__Food_Ordering_System.Admin
             ds = new DataSet();
             da.Fill(ds);
 
+            ddlCategory.Items.Clear();
             ddlCategory.Items.Add("-- Select Category --");
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
@@ -85,16 +86,45 @@ namespace QuickBite__Food_Ordering_System.Admin
             gvMenuItems.DataBind();
         }
 
-        protected void btnSave_Click(object sender, EventArgs e)
+        void selectMenuItem()
         {
             getcon();
-            imgUpload();
+            int id = Convert.ToInt32(ViewState["MenuItemId"]);
+            da = new SqlDataAdapter("SELECT * FROM Add_MenuItems WHERE Id='" + id + "'", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            txtName.Text = ds.Tables[0].Rows[0][1].ToString();
+            txtPrice.Text = ds.Tables[0].Rows[0][2].ToString();
+            ddlCategory.SelectedItem.Text = ds.Tables[0].Rows[0][3].ToString();
+            txtDescription.Text = ds.Tables[0].Rows[0][5].ToString();
+        }
 
-            cmd = new SqlCommand("INSERT INTO Add_MenuItems (Name, Price, CategoryId, Image, Description) VALUES ('" + txtName.Text + "','" + txtPrice.Text + "','" + ViewState["cid"].ToString() + "','" + fnm + "','" + txtDescription.Text + "')", con);
-            cmd.ExecuteNonQuery();
-            Response.Write("<script>alert('Menu item added successfully.')</script>");
-            clear();
-            BindMenuItems();
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (btnSave.Text == "Save Item")
+            {
+                getcon();
+                imgUpload();
+
+                cmd = new SqlCommand("INSERT INTO Add_MenuItems (Name, Price, CategoryId, Image, Description) VALUES ('" + txtName.Text + "','" + txtPrice.Text + "','" + ViewState["cid"].ToString() + "','" + fnm + "','" + txtDescription.Text + "')", con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Menu item added successfully.')</script>");
+                clear();
+                BindMenuItems();
+            }
+            else if (btnSave.Text == "Update Item")
+            {
+                getcon();
+                imgUpload();
+                int id = Convert.ToInt32(ViewState["MenuItemId"]);
+                cmd = new SqlCommand("UPDATE Add_MenuItems SET Name='" + txtName.Text + "', Price='" + txtPrice.Text + "', CategoryId='" + ViewState["cid"].ToString() + "', Image='" + fnm + "', Description='" + txtDescription.Text + "' WHERE Id='" + id + "'", con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Menu item updated successfully.')</script>");
+                clear();
+                BindMenuItems();
+                btnSave.Text = "Save Item";
+            }
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,5 +136,24 @@ namespace QuickBite__Food_Ordering_System.Admin
             ViewState["cid"] = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
         }
 
+        protected void gvMenuItems_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int id = Convert.ToInt32(e.CommandArgument.ToString());
+            if (e.CommandName == "cmd_edt")
+            {
+                ViewState["MenuItemId"] = id;
+                selectMenuItem();
+                btnSave.Text = "Update Item";
+                lblModalTitle.Text = "Edit Menu Item";
+            }
+            else if (e.CommandName == "cmd_dlt")
+            {
+                getcon();
+                cmd = new SqlCommand("DELETE FROM Add_MenuItems WHERE Id=" + id, con);
+                cmd.ExecuteNonQuery();
+                Response.Write("<script>alert('Menu item deleted successfully.')</script>");
+                BindMenuItems();
+            }
+        }
     }
 }

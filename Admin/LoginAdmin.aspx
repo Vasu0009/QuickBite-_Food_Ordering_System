@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="LoginAdminaspx.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Admin.LoginAdminaspx" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="LoginAdmin.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Admin.LoginAdminaspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -60,7 +60,7 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
+      <%--  <script>
             document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
                 e.preventDefault();
                 const email = document.getElementById('admintxtunm').value.trim();
@@ -85,12 +85,12 @@
                         }
                     }, 5000);
                 }
-            });
+            });--%>
 
-            // Fix for the server-side button click
+            <%--// Fix for the server-side button click
             document.getElementById('<%= adminLoginBtn.ClientID %>').addEventListener('click', function () {
                 document.getElementById('adminLoginForm').submit();
             });
-        </script>
+        </script>--%>
     </body>
 </asp:Content>
