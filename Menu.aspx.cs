@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -22,26 +23,65 @@ namespace QuickBite__Food_Ordering_System
         int p, row;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             getcon();
-            fillDataList();
+            if (!IsPostBack)
+            {
+
+
+                fillDataList();
+
+
+            }
+
         }
 
         void getcon()
         {
             con = new SqlConnection(str);
             con.Open();
+
         }
+
+        protected void prebtn_Click(object sender, ImageClickEventArgs e)
+        {
+            int currentPage = Convert.ToInt32(ViewState["pid"]);
+            currentPage--;
+            ViewState["pid"] = currentPage;
+            fillDataList();
+        }
+
+        protected void nextbtn_Click(object sender, ImageClickEventArgs e)
+        {
+            int currentPage = Convert.ToInt32(ViewState["pid"]);
+            currentPage++;
+            ViewState["pid"] = currentPage;
+            fillDataList();
+        }
+
         void fillDataList()
         {
-            
-            da = new SqlDataAdapter("select * from Add_MenuItems", con);
+            da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, Description FROM Add_MenuItems", con);
             ds = new DataSet();
             da.Fill(ds);
 
+            row = ds.Tables[0].Rows.Count;
 
-            dtlsmenu.DataSource = ds;
+            pg.AllowPaging = true;
+            pg.PageSize = 3;
+            pg.CurrentPageIndex = Convert.ToInt32(ViewState["pid"]);
+
+            pg.DataSource = ds.Tables[0].DefaultView;
+
+            prebtn.Enabled = !pg.IsFirstPage;
+            nextbtn.Enabled = !pg.IsLastPage;
+
+
+            dtlsmenu.DataSource = pg;
             dtlsmenu.DataBind();
         }
+
+
 
     }
 }

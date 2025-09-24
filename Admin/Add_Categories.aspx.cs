@@ -108,6 +108,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 selectCategory();
                 btnSave.Text = "Update Category";
                 lblModalTitle.Text = "Edit Category";
+
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "openModal();", true);
 
 

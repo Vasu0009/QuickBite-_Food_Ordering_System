@@ -51,14 +51,17 @@
                                                 <asp:Label ID="lblPrice" runat="server" Text='<%# "₹" + Eval("Price") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
+                                        <asp:TemplateField HeaderText="Description">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblDescription" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Image">
                                             <ItemTemplate>
                                                 <asp:Image ID="imgItem" runat="server" ImageUrl='<%# Eval("Image") %>'
                                                     CssClass="img-thumbnail" Width="60" Height="60" />
                                             </ItemTemplate>
                                         </asp:TemplateField>
-
                                         <asp:TemplateField HeaderText="Actions">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-sm btn-outline-primary me-1"
@@ -77,7 +80,7 @@
                                     </Columns>
                                     <EmptyDataTemplate>
                                         <tr>
-                                            <td colspan="6" class="text-center text-muted">No menu items found</td>
+                                            <td colspan="7" class="text-center text-muted">No menu items found</td>
                                         </tr>
                                     </EmptyDataTemplate>
                                 </asp:GridView>
@@ -148,7 +151,7 @@
                 modal.hide();
             }
 
-<%--            // Function to clear form when adding new item
+            // Function to clear form when adding new item
             function clearForm() {
                 document.getElementById('<%= hdnItemId.ClientID %>').value = "0";
                 document.getElementById('<%= txtName.ClientID %>').value = "";
@@ -165,73 +168,6 @@
                     categoryDropdown.selectedIndex = 0;
                 }
             }
-
-            // Function to show modal when editing
-            function showEditModal(itemId) {
-                // Set the hidden field with the item ID
-                document.getElementById('<%= hdnItemId.ClientID %>').value = itemId;
-
-                // Make an AJAX call to get the item details
-                var xhr = new XMLHttpRequest();
-                xhr.open("POST", "Add_Menu.aspx/GetMenuItem", true);
-                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var result = JSON.parse(xhr.responseText);
-                        if (result.d) {
-                            var item = result.d;
-
-                            // Populate the form fields
-                            document.getElementById('<%= txtName.ClientID %>').value = item.Name;
-                            document.getElementById('<%= txtPrice.ClientID %>').value = item.Price;
-                            document.getElementById('<%= txtDescription.ClientID %>').value = item.Description;
-                            document.getElementById('<%= hdnCurrentImage.ClientID %>').value = item.Image;
-
-                            // Set the category
-                            var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
-                            for (var i = 0; i < categoryDropdown.options.length; i++) {
-                                if (categoryDropdown.options[i].value == item.CategoryId) {
-                                    categoryDropdown.selectedIndex = i;
-                                    break;
-                                }
-                            }
-
-                            // Update modal title and button text
-                            document.getElementById('<%= lblModalTitle.ClientID %>').innerText = "Edit Menu Item";
-                            document.getElementById('<%= btnSave.ClientID %>').innerText = "Update Item";
-
-                            // Show the modal
-                            showModal();
-                        }
-                    }
-                };
-
-                xhr.send(JSON.stringify({ itemId: itemId }));
-            }
-
-            // Show modal if there's an error after postback
-            window.onload = function () {
-                <% if (ViewState["ShowModal"] != null && (bool)ViewState["ShowModal"])
-            { %>
-                showModal();
-                <% } %>
-            };--%>
-
-
-            // Function to show the modal
-            function showModal() {
-                var myModal = new bootstrap.Modal(document.getElementById('menuModal'));
-                myModal.show();
-            }
-
-            // Function to close the modal
-            function closeModal() {
-                var myModalEl = document.getElementById('menuModal');
-                var modal = bootstrap.Modal.getInstance(myModalEl);
-                modal.hide();
-            }
-
         </script>
     </body>
 </asp:Content>

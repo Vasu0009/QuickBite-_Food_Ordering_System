@@ -56,7 +56,7 @@ namespace QuickBite__Food_Ordering_System.Admin
         {
             if (fldimg.HasFile)
             {
-                fnm = "images/" + fldimg.FileName;
+                fnm = "../MenuImg/" + fldimg.FileName;
                 fldimg.SaveAs(Server.MapPath(fnm));
             }
         }
@@ -75,10 +75,11 @@ namespace QuickBite__Food_Ordering_System.Admin
             }
         }
 
+
         void BindMenuItems()
         {
             getcon();
-            da = new SqlDataAdapter("SELECT * FROM Add_MenuItems", con);
+            da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, [Description] AS Description FROM Add_MenuItems", con);
             ds = new DataSet();
             da.Fill(ds);
 
@@ -90,14 +91,15 @@ namespace QuickBite__Food_Ordering_System.Admin
         {
             getcon();
             int id = Convert.ToInt32(ViewState["MenuItemId"]);
-            da = new SqlDataAdapter("SELECT * FROM Add_MenuItems WHERE Id='" + id + "'", con);
+            da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, [Description] AS Description FROM Add_MenuItems WHERE Id='" + id + "'", con);
             ds = new DataSet();
             da.Fill(ds);
-            txtName.Text = ds.Tables[0].Rows[0][1].ToString();
-            txtPrice.Text = ds.Tables[0].Rows[0][2].ToString();
-            ddlCategory.SelectedItem.Text = ds.Tables[0].Rows[0][3].ToString();
-            txtDescription.Text = ds.Tables[0].Rows[0][5].ToString();
+            txtName.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+            txtPrice.Text = ds.Tables[0].Rows[0]["Price"].ToString();
+            ddlCategory.SelectedItem.Text = ds.Tables[0].Rows[0]["CategoryId"].ToString();
+            txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
         }
+
 
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -112,6 +114,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 Response.Write("<script>alert('Menu item added successfully.')</script>");
                 clear();
                 BindMenuItems();
+
             }
             else if (btnSave.Text == "Update Item")
             {
@@ -124,6 +127,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 clear();
                 BindMenuItems();
                 btnSave.Text = "Save Item";
+
             }
         }
 
@@ -134,6 +138,8 @@ namespace QuickBite__Food_Ordering_System.Admin
             da.Fill(ds);
 
             ViewState["cid"] = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "showModal();", true);
         }
 
         protected void gvMenuItems_RowCommand(object sender, GridViewCommandEventArgs e)

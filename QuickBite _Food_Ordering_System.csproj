@@ -93,6 +93,8 @@
     <Content Include="assets\images\7.jpg" />
     <Content Include="assets\images\8.jpg" />
     <Content Include="assets\images\9.jpg" />
+    <Content Include="assets\images\Add_to_cart.png" />
+    <Content Include="assets\images\add_to_cart_btn.png" />
     <Content Include="assets\images\chef1.jpg" />
     <Content Include="assets\images\chef2.png" />
     <Content Include="assets\images\food1.jpg" />
@@ -104,7 +106,10 @@
     <Content Include="assets\images\hero4.jpg" />
     <Content Include="assets\images\hero5.jpg" />
     <Content Include="assets\images\manager.jpeg" />
+    <Content Include="assets\images\next_btn.png" />
+    <Content Include="assets\images\per_btn.png" />
     <Content Include="assets\images\restaurant.jpg" />
+    <Content Include="assets\images\view_detail_btn.png" />
     <Content Include="Cart.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="css\admin.css" />
@@ -252,7 +257,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\images\" />
+    <Folder Include="MenuImg\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
