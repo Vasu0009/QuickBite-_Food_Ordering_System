@@ -59,8 +59,16 @@ namespace QuickBite__Food_Ordering_System
             fillDataList();
         }
 
+        
+
+        protected void dtlsmenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         void fillDataList()
         {
+            int temp;
             da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, Description FROM Add_MenuItems", con);
             ds = new DataSet();
             da.Fill(ds);
