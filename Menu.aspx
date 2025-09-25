@@ -268,52 +268,54 @@
             </div>
         </div>--%>
         </div>
-        <div class="container">
-            <div class="row g-4">
-                <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table" OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged">
-                    <ItemTemplate>
-                        <table class="menu-item-table">
-                            <tr>
-                                <td>
-                                    <div class="card h-100 menu-card shadow-sm">
-                                        <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
-                                            ImageUrl='<%# Eval("Image") %>' />
+        <center>
+            <div class="container">
+                <div class="row g-4">
+                    <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table" OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged">
+                        <ItemTemplate>
+                            <table class="menu-item-table">
+                                <tr>
+                                    <td>
+                                        <div class="card h-100 menu-card shadow-sm">
+                                            <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
+                                                ImageUrl='<%# Eval("Image") %>' />
 
-                                        <div class="card-body text-center">
-                                            <h5 class="card-title fw-bold">
-                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
-                                            </h5>
-                                            <p class="card-text text-muted">
-                                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
-                                            </p>
-                                            <p class="fw-bold text-warning">
-                                                ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
-                                            </p>
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title fw-bold">
+                                                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                                                </h5>
+                                                <p class="card-text text-muted">
+                                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
+                                                </p>
+                                                <p class="fw-bold text-warning">
+                                                    ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
+                                                </p>
 
-                                            <div class="d-flex justify-content-center gap-2">
-                                                <asp:ImageButton ID="addbtn"
-                                                    ImageUrl="~/assets/images/add_to_cart_btn.png" runat="server" CommandName="cmd_view"
-                                                    AlternateText="Add To Cart" Height="60px" Width="180px" CssClass="img-btn" />
+                                                <div class="d-flex justify-content-center gap-2">
+                                                    <asp:ImageButton ID="addbtn"
+                                                        ImageUrl="~/assets/images/Add_to_cart_btn.png" runat="server" CommandName="cmd_view"
+                                                        AlternateText="Add To Cart" Height="80px" Width="180px" CssClass="img-btn" />
 
-                                                <asp:ImageButton ID="viewbtn"
-                                                    ImageUrl="~/assets/images/view_detail_btn.png" runat="server"
-                                                    AlternateText="View Detail" Height="60px" Width="180px" CssClass="img-btn" />
+                                                    <asp:ImageButton ID="viewbtn"
+                                                        ImageUrl="~/assets/images/View_details_btn.png" runat="server"
+                                                        AlternateText="View Detail" Height="80px" Width="180px" CssClass="img-btn" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </ItemTemplate>
-                </asp:DataList>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ItemTemplate>
+                    </asp:DataList>
 
-                <!-- Prev & Next buttons aligned -->
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                    <asp:ImageButton ID="prebtn" ImageUrl="~/assets/images/per_btn.png" runat="server" AlternateText="Previous" Height="50px" Width="80px" />
-                    <asp:ImageButton ID="nextbtn" ImageUrl="~/assets/images/next_btn.png" runat="server" AlternateText="Next" Height="50px" Width="80px" />
+                    <!-- Prev & Next buttons aligned -->
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <asp:ImageButton ID="prebtn" ImageUrl="~/assets/images/Previus_btn.png" runat="server" AlternateText="Previous" Height="70px" Width="100px" OnClick="prebtn_Click1" />
+                        <asp:ImageButton ID="nextbtn" ImageUrl="~/assets/images/Next_btn.png" runat="server" AlternateText="Next" Height="70px" Width="100px" OnClick="nextbtn_Click1" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </center>
     </section>
 </asp:Content>
 <asp:Content ID="Content6" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">

@@ -27,11 +27,7 @@ namespace QuickBite__Food_Ordering_System
             getcon();
             if (!IsPostBack)
             {
-
-
                 fillDataList();
-
-
             }
 
         }
@@ -43,15 +39,14 @@ namespace QuickBite__Food_Ordering_System
 
         }
 
-        protected void prebtn_Click(object sender, ImageClickEventArgs e)
+
+
+        protected void dtlsmenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int currentPage = Convert.ToInt32(ViewState["pid"]);
-            currentPage--;
-            ViewState["pid"] = currentPage;
-            fillDataList();
+
         }
 
-        protected void nextbtn_Click(object sender, ImageClickEventArgs e)
+        protected void nextbtn_Click1(object sender, ImageClickEventArgs e)
         {
             int currentPage = Convert.ToInt32(ViewState["pid"]);
             currentPage++;
@@ -59,16 +54,17 @@ namespace QuickBite__Food_Ordering_System
             fillDataList();
         }
 
-        
-
-        protected void dtlsmenu_SelectedIndexChanged(object sender, EventArgs e)
+        protected void prebtn_Click1(object sender, ImageClickEventArgs e)
         {
-
+            int currentPage = Convert.ToInt32(ViewState["pid"]);
+            currentPage--;
+            ViewState["pid"] = currentPage;
+            fillDataList();
         }
 
         void fillDataList()
         {
-            int temp;
+
             da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, Description FROM Add_MenuItems", con);
             ds = new DataSet();
             da.Fill(ds);
