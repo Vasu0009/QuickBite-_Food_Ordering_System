@@ -38,13 +38,11 @@ namespace QuickBite__Food_Ordering_System
             con.Open();
 
         }
-
-
-
         protected void dtlsmenu_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
 
         protected void nextbtn_Click1(object sender, ImageClickEventArgs e)
         {
@@ -60,6 +58,15 @@ namespace QuickBite__Food_Ordering_System
             currentPage--;
             ViewState["pid"] = currentPage;
             fillDataList();
+        }
+
+        protected void dtlsmenu_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if (e.CommandName == "cmd_view")
+            {
+                int id = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("MenuDetails.aspx?id=" + id);
+            }
         }
 
         void fillDataList()

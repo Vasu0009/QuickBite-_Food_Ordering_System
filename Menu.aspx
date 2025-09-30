@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -141,29 +140,6 @@
             });
         });
     </script>
-
-    <%--    <!-- Cute Login Notification -->
-    <div id="cuteLoginNotification" class="cute-notification" style="display: none;">
-        <div class="notification-content">
-            <div class="notification-icon">
-                <i class="bi bi-heart-fill"></i>
-            </div>
-            <div class="notification-text">
-                <h6 class="notification-title">Hey there! 👋</h6>
-                <p class="notification-message">
-                    Please login first to add items to your cart and enjoy a personalized shopping experience!
-                </p>
-            </div>
-            <div class="notification-actions">
-                <a href="Login.aspx" class="btn btn-cute-login"><i class="bi bi-box-arrow-in-right me-2"></i>Login Now </a>
-                <button class="btn btn-cute-close" onclick="hideCuteNotification()">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
-        </div>
-        <div class="notification-progress">
-        </div>
-    </div>--%>
 </asp:Content>
 <asp:Content ID="Content5" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <!-- Menu Header -->
@@ -178,9 +154,8 @@
         </div>
     </section>
 
-    <!-- Menu Categories -->
-    <section class="py-5">
-        <div class="container">
+    
+
             <!-- Search and Filter Section -->
             <div class="row mb-4">
                 <div class="col-lg-6 col-md-8 mx-auto mb-3">
@@ -191,122 +166,56 @@
                 </div>
             </div>
 
-            <%--<!-- Menu Items -->
-            <div class="row g-4" id="menu-items">
-                <!-- Starters -->
-                <div class="col-lg-4 col-md-6 menu-item" data-category="starters">
-                    <div class="card h-100 menu-card">
-                        <img src="assets/images/1.jpg" class="card-img-top" alt="Paneer Tikka">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Paneer Tikka</h5>
-                            <p class="card-text text-muted">Grilled cottage cheese with aromatic spices</p>
-                            <p class="fw-bold text-warning">₹199</p>
-                            <button class="btn btn-outline-warning" onclick="addToCart('Paneer Tikka', 199, 'assets/images/1.jpg')">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 menu-item" data-category="starters">
-                    <div class="card h-100 menu-card">
-                        <img src="assets/images/2.jpg" class="card-img-top" alt="Aloo Tikki">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Aloo Tikki</h5>
-                            <p class="card-text text-muted">Spiced potato patties with chutney</p>
-                            <p class="fw-bold text-warning">₹149</p>
-                            <button class="btn btn-outline-warning" onclick="addToCart('Aloo Tikki', 149, 'assets/images/2.jpg')">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 menu-item" data-category="starters">
-                    <div class="card h-100 menu-card">
-                        <img src="assets/images/3.jpg" class="card-img-top" alt="Veg Spring Roll">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Veg Spring Roll</h5>
-                            <p class="card-text text-muted">Crispy rolls with fresh vegetables</p>
-                            <p class="fw-bold text-warning">₹149</p>
-                            <button class="btn btn-outline-warning" onclick="addToCart('Veg Spring Roll', 149, 'assets/images/3.jpg')">
-                                Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 menu-item" data-category="starters">
-                    <div class="card h-100 menu-card">
-                        <img src="assets/images/4.jpg" class="card-img-top" alt="Mushroom Manchurian">
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">Mushroom Manchurian</h5>
-                            <p class="card-text text-muted">Crispy mushrooms in spicy sauce</p>
-                            <p class="fw-bold text-warning">₹179</p>
-                            <button class="btn btn-outline-warning" onclick="addToCart('Mushroom Manchurian', 179, 'assets/images/4.jpg')">
-                                Add to Cart
-                            </button>
-                        </div>
-        </div>
-             
-                </div>
-
-                <!-- Main Course -->
-        <div class="col-lg-4 col-md-6 menu-item" data-category="main-course">
-            <div class="card h-100 menu-card">
-                <img src="assets/images/5.jpg" class="card-img-top" alt="Dal Makhani">
-                <div class="card-body text-center">
-                    <h5 class="card-title fw-bold">
-                    Dal Makhani  
-                    <p class="card-text text-muted">Creamy black lentils with spices</p>
-                    <p class="fw-bold text-warning">₹199</p>
-                    <button class="btn btn-outline-warning" onclick="addToCart('Dal Makhani', 199, 'assets/images/5.jpg')">
-                        Add to Cart
-                    </button>
-                    
-                </div>
-            </div>
-        </div>--%>
-        </div>
-        <center>
             <div class="container">
                 <div class="row g-4">
-                    <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table" OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged">
-                        <ItemTemplate>
-                            <table class="menu-item-table">
-                                <tr>
-                                    <td>
-                                        <div class="card h-100 menu-card shadow-sm">
-                                            <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
-                                                ImageUrl='<%# Eval("Image") %>' />
+                    <center>
+                        <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table" OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged" OnItemCommand="dtlsmenu_ItemCommand">
+                            <ItemTemplate>
+                                <table class="menu-item-table">
+                                    <tr>
+                                        <td>
+                                            <div class="card h-100 menu-card shadow-sm">
+                                                <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
+                                                    ImageUrl='<%# Eval("Image") %>' Height="200px" Width="100%" />
 
-                                            <div class="card-body text-center">
-                                                <h5 class="card-title fw-bold">
-                                                    <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
-                                                </h5>
-                                                <p class="card-text text-muted">
-                                                    <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
-                                                </p>
-                                                <p class="fw-bold text-warning">
-                                                    ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
-                                                </p>
+                                                <div class="card-body text-center">
+                                                    <h5 class="card-title fw-bold">
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                                                    </h5>
+                                                    <p class="card-text text-muted">
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
+                                                    </p>
+                                                    <p class="fw-bold text-warning">
+                                                        ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
+                                                    </p>
 
-                                                <div class="d-flex justify-content-center gap-2">
-                                                    <asp:ImageButton ID="addbtn"
-                                                        ImageUrl="~/assets/images/Add_to_cart_btn.png" runat="server" CommandName="cmd_view"
-                                                        AlternateText="Add To Cart" Height="80px" Width="180px" CssClass="img-btn" />
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <asp:ImageButton ID="addbtn"
+                                                            ImageUrl="~/assets/images/Add_to_cart_btn.png" runat="server" CommandName="cmd_view"
+                                                            AlternateText="Add To Cart" Height="70px" Width="160px" CssClass="img-btn" />
 
-                                                    <asp:ImageButton ID="viewbtn"
-                                                        ImageUrl="~/assets/images/View_details_btn.png" runat="server"
-                                                        AlternateText="View Detail" Height="80px" Width="180px" CssClass="img-btn" />
+                                                        <asp:ImageButton ID="viewbtn"
+                                                            ImageUrl="~/assets/images/View_details_btn.png"
+                                                            runat="server"
+                                                            AlternateText="View Detail"
+                                                            Height="70px" Width="160px"
+                                                            PostBackUrl='<%# "MenuDetails.aspx?id=" + Eval("Id") %>' />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </ItemTemplate>
-                    </asp:DataList>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ItemTemplate>
+                        </asp:DataList>
+                    </center>
+                    
+                    <!-- No Items Message -->
+                    <asp:Panel ID="pnlNoItems" runat="server" CssClass="text-center py-5" Visible="false">
+                        <i class="bi bi-inbox display-1 text-muted"></i>
+                        <h4 class="text-muted mt-3">No menu items found</h4>
+                        <p class="text-muted">Please try selecting a different category</p>
+                    </asp:Panel>
 
                     <!-- Prev & Next buttons aligned -->
                     <div class="d-flex justify-content-between align-items-center mt-4">
@@ -315,8 +224,37 @@
                     </div>
                 </div>
             </div>
-        </center>
+        </div>
     </section>
+      
+    <script>
+        function setActiveCategory(btn) {
+            // Remove active class from all category buttons
+            document.querySelectorAll('.category-btn').forEach(function (element) {
+                element.classList.remove('active');
+                element.classList.remove('btn-warning');
+                element.classList.add('btn-outline-warning');
+            });
+
+            // Add active class to clicked button
+            btn.classList.add('active');
+            btn.classList.add('btn-warning');
+            btn.classList.remove('btn-outline-warning');
+        }
+
+        // Set active class on page load based on current selection
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryId = urlParams.get('category');
+
+            if (categoryId) {
+                const activeBtn = document.querySelector('[data-category="' + categoryId + '"]');
+                if (activeBtn) {
+                    setActiveCategory(activeBtn);
+                }
+            }
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content6" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <!-- Navigation -->
@@ -327,6 +265,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="Home.aspx">Home</a> </li>
                     <li class="nav-item"><a class="nav-link active" href="Menu.aspx">Menu</a> </li>

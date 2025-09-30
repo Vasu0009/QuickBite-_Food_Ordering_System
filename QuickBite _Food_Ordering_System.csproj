@@ -112,6 +112,7 @@
     <Content Include="Cart.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="css\admin.css" />
+    <Content Include="css\MenuDetails.css" />
     <Content Include="css\style.css" />
     <Content Include="Home.aspx" />
     <Content Include="js\admin.js" />
@@ -119,6 +120,7 @@
     <Content Include="js\script.js" />
     <Content Include="Login.aspx" />
     <Content Include="Menu.aspx" />
+    <Content Include="MenuDetails.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -227,6 +229,13 @@
     </Compile>
     <Compile Include="Menu.aspx.designer.cs">
       <DependentUpon>Menu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MenuDetails.aspx.cs">
+      <DependentUpon>MenuDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MenuDetails.aspx.designer.cs">
+      <DependentUpon>MenuDetails.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickBite.Master.cs">
