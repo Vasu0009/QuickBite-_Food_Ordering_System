@@ -11,12 +11,17 @@ namespace QuickBite__Food_Ordering_System.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["admin"] == null)
+            {
+                Response.Redirect("LoginAdmin.aspx");
+            }
+
 
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("LoginAdminaspx.aspx");
+            Response.Redirect("LoginAdmin.aspx");
         }
     }
 }

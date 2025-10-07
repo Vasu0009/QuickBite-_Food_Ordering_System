@@ -56,7 +56,7 @@
             </div>
         </div>
     </footer>
-    <!-- Cart Modal -->
+    <%--<!-- Cart Modal -->
     <div class="modal fade" id="cartModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0 shadow-lg">
@@ -98,7 +98,7 @@
             </div>
         </div>
     </div>
-
+    --%>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
@@ -154,77 +154,85 @@
         </div>
     </section>
 
-    
 
-            <!-- Search and Filter Section -->
-            <div class="row mb-4">
-                <div class="col-lg-6 col-md-8 mx-auto mb-3">
-                    <div class="search-container">
-                        <i class="bi bi-search search-icon"></i>
-                        <input type="text" id="menuSearch" class="form-control search-input" placeholder="Search for dishes..." onkeyup="searchMenuItems()">
-                    </div>
-                </div>
-            </div>
 
-            <div class="container">
-                <div class="row g-4">
-                    <center>
-                        <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table" OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged" OnItemCommand="dtlsmenu_ItemCommand">
-                            <ItemTemplate>
-                                <table class="menu-item-table">
-                                    <tr>
-                                        <td>
-                                            <div class="card h-100 menu-card shadow-sm">
-                                                <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
-                                                    ImageUrl='<%# Eval("Image") %>' Height="200px" Width="100%" />
-
-                                                <div class="card-body text-center">
-                                                    <h5 class="card-title fw-bold">
-                                                        <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
-                                                    </h5>
-                                                    <p class="card-text text-muted">
-                                                        <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
-                                                    </p>
-                                                    <p class="fw-bold text-warning">
-                                                        ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
-                                                    </p>
-
-                                                    <div class="d-flex justify-content-center gap-2">
-                                                        <asp:ImageButton ID="addbtn"
-                                                            ImageUrl="~/assets/images/Add_to_cart_btn.png" runat="server" CommandName="cmd_view"
-                                                            AlternateText="Add To Cart" Height="70px" Width="160px" CssClass="img-btn" />
-
-                                                        <asp:ImageButton ID="viewbtn"
-                                                            ImageUrl="~/assets/images/View_details_btn.png"
-                                                            runat="server"
-                                                            AlternateText="View Detail"
-                                                            Height="70px" Width="160px"
-                                                            PostBackUrl='<%# "MenuDetails.aspx?id=" + Eval("Id") %>' />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </center>
-                    
-                    <!-- No Items Message -->
-                    <asp:Panel ID="pnlNoItems" runat="server" CssClass="text-center py-5" Visible="false">
-                        <i class="bi bi-inbox display-1 text-muted"></i>
-                        <h4 class="text-muted mt-3">No menu items found</h4>
-                        <p class="text-muted">Please try selecting a different category</p>
-                    </asp:Panel>
-
-                    <!-- Prev & Next buttons aligned -->
-                    <div class="d-flex justify-content-between align-items-center mt-4">
-                        <asp:ImageButton ID="prebtn" ImageUrl="~/assets/images/Previus_btn.png" runat="server" AlternateText="Previous" Height="70px" Width="100px" OnClick="prebtn_Click1" />
-                        <asp:ImageButton ID="nextbtn" ImageUrl="~/assets/images/Next_btn.png" runat="server" AlternateText="Next" Height="70px" Width="100px" OnClick="nextbtn_Click1" />
-                    </div>
-                </div>
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-lg-6 col-md-8 mx-auto mb-3">
+            <div class="search-container">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" id="menuSearch" class="form-control search-input" placeholder="Search for dishes..." onkeyup="searchMenuItems()">
             </div>
         </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <center>
+
+                <div class="welcome-message">
+                    <asp:Label ID="lbl" runat="server" Text="Label"></asp:Label>
+                </div>
+
+                <asp:DataList ID="dtlsmenu" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table" RepeatColumns="3" CellPadding="10" CssClass="menu-table"
+                    OnSelectedIndexChanged="dtlsmenu_SelectedIndexChanged" OnItemCommand="dtlsmenu_ItemCommand">
+
+                    <ItemTemplate>
+                        <table class="menu-item-table">
+                            <tr>
+                                <td>
+                                    <div class="card h-100 menu-card shadow-sm">
+                                        <asp:Image ID="Image1" runat="server" CssClass="card-img-top"
+                                            ImageUrl='<%# Eval("Image") %>' Height="200px" Width="100%" />
+
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title fw-bold">
+                                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                                            </h5>
+                                            <p class="card-text text-muted">
+                                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("Description") %>'></asp:Label>
+                                            </p>
+                                            <p class="fw-bold text-warning">
+                                                ₹<asp:Label ID="Label3" runat="server" Text='<%# Eval("Price") %>'></asp:Label>
+                                            </p>
+
+                                            <div class="d-flex justify-content-center gap-2">
+
+                                                <asp:LinkButton ID="lnkadd" runat="server" CommandName="cmd_cart"
+                                                    CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-warning fw-bold px-3 py-2">
+                                    <i class="bi bi-cart3 me-2"></i>Add To Cart
+                                                </asp:LinkButton>
+
+                                                <asp:LinkButton ID="lnkvu" runat="server" CommandName="cmd_view"
+                                                    CommandArgument='<%# Eval("Id") %>' CssClass="btn btn-outline-secondary px-3 py-2">
+                                    <i class="bi bi-eye me-2"></i>View Details
+                                                </asp:LinkButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </ItemTemplate>
+                </asp:DataList>
+
+            </center>
+
+            <!-- No Items Message -->
+            <asp:Panel ID="pnlNoItems" runat="server" CssClass="text-center py-5" Visible="false">
+                <i class="bi bi-inbox display-1 text-muted"></i>
+                <h4 class="text-muted mt-3">No menu items found</h4>
+                <p class="text-muted">Please try selecting a different category</p>
+            </asp:Panel>
+
+            <!-- Prev & Next buttons aligned -->
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <asp:ImageButton ID="prebtn" ImageUrl="~/assets/images/Previus_btn.png" runat="server" AlternateText="Previous" Height="70px" Width="100px" OnClick="prebtn_Click1" />
+                <asp:ImageButton ID="nextbtn" ImageUrl="~/assets/images/Next_btn.png" runat="server" AlternateText="Next" Height="70px" Width="100px" OnClick="nextbtn_Click1" />
+            </div>
+        </div>
+    </div>
+    </div>
     </section>
       
     <script>
@@ -265,13 +273,14 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                
+
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="Home.aspx">Home</a> </li>
                     <li class="nav-item"><a class="nav-link active" href="Menu.aspx">Menu</a> </li>
                     <li class="nav-item"><a class="nav-link" href="About.aspx">About</a> </li>
                     <li class="nav-item"><a class="nav-link" href="Contact.aspx">Contact</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i class="bi bi-cart3"></i>Cart <span id="cart-count" class="badge bg-warning text-dark">0</span> </a></li>
+                    <li class="nav-item"><a class="nav-link" href="Cart.aspx">Cart</a> </li>
+
                     <li class="nav-item dropdown auth-link login-link"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i>Account </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="Login.aspx"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>

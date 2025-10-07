@@ -228,7 +228,7 @@
         }
     </script>
 
-     <!-- Cart Modal -->
+    <%-- <!-- Cart Modal -->
             <div class="modal fade" id="cartModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content border-0 shadow-lg">
@@ -268,7 +268,7 @@
                         </div>
                     </div>
                 </div>
-</div>
+</div>--%>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -312,7 +312,7 @@
         });
     </script>
 
-  <%--  <!-- Cute Login Notification -->
+    <%--  <!-- Cute Login Notification -->
     <div id="cuteLoginNotification" class="cute-notification" style="display: none;">
         <div class="notification-content">
             <div class="notification-icon">
@@ -553,7 +553,8 @@
                     <li class="nav-item"><a class="nav-link" href="Menu.aspx">Menu</a> </li>
                     <li class="nav-item"><a class="nav-link" href="About.aspx">About</a> </li>
                     <li class="nav-item"><a class="nav-link" href="Contact.aspx">Contact</a> </li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i class="bi bi-cart3"></i>Cart <span id="cart-count" class="badge bg-warning text-dark">0</span> </a></li>
+                    <li class="nav-item"><a class="nav-link" href="Cart.aspx">Cart</a> </li>
+
                     <li class="nav-item dropdown auth-link login-link"><a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle"></i>Account </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="Login.aspx"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
