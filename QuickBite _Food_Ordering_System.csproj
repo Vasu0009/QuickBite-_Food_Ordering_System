@@ -113,6 +113,7 @@
     <Content Include="CheckOut.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="css\admin.css" />
+    <Content Include="css\CheckOut.css" />
     <Content Include="css\MenuDetails.css" />
     <Content Include="css\style.css" />
     <Content Include="Home.aspx" />

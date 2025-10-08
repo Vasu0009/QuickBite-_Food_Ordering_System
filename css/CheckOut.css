@@ -1,0 +1,63 @@
+﻿
+.checkout-container {
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.checkout-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.checkout-card-header {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: #000;
+    font-weight: bold;
+    border-radius: 15px 15px 0 0 !important;
+    padding: 15px 20px;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+.payment-option {
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+    .payment-option:hover {
+        border-color: #ffc107;
+        background-color: #fff8e1;
+    }
+
+    .payment-option.selected {
+        border-color: #ffc107;
+        background-color: #fff8e1;
+    }
+
+.order-summary-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 0;
+}
+
+.total-section {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.required-field::after {
+    content: " *";
+    color: red;
+}
+
+

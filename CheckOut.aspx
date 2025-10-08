@@ -1,62 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/QuickBite.Master" AutoEventWireup="true" CodeBehind="CheckOut.aspx.cs" Inherits="QuickBite__Food_Ordering_System.CheckOut" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
-        .checkout-container {
-            margin-top: 100px;
-            margin-bottom: 50px;
-        }
-        .checkout-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        .checkout-card-header {
-            background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
-            color: #000;
-            font-weight: bold;
-            border-radius: 15px 15px 0 0 !important;
-            padding: 15px 20px;
-        }
-        .form-control:focus, .form-select:focus {
-            border-color: #ffc107;
-            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
-        }
-        .payment-option {
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .payment-option:hover {
-            border-color: #ffc107;
-            background-color: #fff8e1;
-        }
-        .payment-option.selected {
-            border-color: #ffc107;
-            background-color: #fff8e1;
-        }
-        .order-summary-item {
-            border-bottom: 1px solid #e0e0e0;
-            padding: 10px 0;
-        }
-        .total-section {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
-        .required-field::after {
-            content: " *";
-            color: red;
-        }
-    </style>
+   
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <link href="css/CheckOut.css" rel="stylesheet" />
     <div class="container checkout-container">
         <div class="text-center mb-5">
             <h1 class="display-4 fw-bold text-dark">
@@ -251,14 +200,8 @@
                                 <span>Subtotal:</span>
                                 <asp:Label ID="lblSubtotal" runat="server" CssClass="fw-bold"></asp:Label>
                             </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Delivery Charges:</span>
-                                <asp:Label ID="lblDelivery" runat="server" Text="₹40.00" CssClass="fw-bold"></asp:Label>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>GST (5%):</span>
-                                <asp:Label ID="lblGST" runat="server" CssClass="fw-bold"></asp:Label>
-                            </div>
+                            
+                            
                             <hr />
                             <div class="d-flex justify-content-between">
                                 <h5 class="mb-0">Total Amount:</h5>
@@ -270,9 +213,9 @@
 
                         <div class="d-grid gap-2 mt-4">
                             <asp:Button ID="btnPlaceOrder" runat="server" Text="Place Order" 
-                                CssClass="btn btn-warning btn-lg fw-bold" OnClick="btnPlaceOrder_Click" />
+                                 OnClick="btnPlaceOrder_Click" />
                             <asp:Button ID="btnBackToCart" runat="server" Text="Back to Cart" 
-                                CssClass="btn btn-outline-secondary" OnClick="btnBackToCart_Click" CausesValidation="false" />
+                                 OnClick="btnBackToCart_Click" CausesValidation="false" />
                         </div>
 
                         <div class="text-center mt-3">

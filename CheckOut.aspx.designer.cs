@@ -258,24 +258,6 @@ namespace QuickBite__Food_Ordering_System
         protected global::System.Web.UI.WebControls.Label lblSubtotal;
 
         /// <summary>
-        /// lblDelivery control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDelivery;
-
-        /// <summary>
-        /// lblGST control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGST;
-
-        /// <summary>
         /// lblTotalAmount control.
         /// </summary>
         /// <remarks>
