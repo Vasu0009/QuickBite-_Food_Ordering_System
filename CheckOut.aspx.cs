@@ -134,8 +134,13 @@ namespace QuickBite__Food_Ordering_System
             string billingAddress = txtBillAddress.Text.Trim() + ", " + txtBillCity.Text.Trim() + ", " + txtBillState.Text.Trim() + " - " + txtBillPincode.Text.Trim();
             string paymentMethod = rblPaymentMethod.SelectedValue;
 
-            // 5. Insert Order Items
+            if (string.IsNullOrEmpty(shippingAddress))
+            {
+                lblMessage.Text = "Please enter a shipping address.";
+                return;
+            }
 
+            
             cmd = new SqlCommand(
                 "INSERT INTO Orders(User_Id,Order_Date,Total_Amount,Order_Status,Shipping_Address,Billing_Address,Payment_Method) " +
                 "VALUES('" + uid + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','" + subtotal + "','Pending','" + shippingAddress + "','" + billingAddress + "','" + paymentMethod + "'); SELECT SCOPE_IDENTITY();",
@@ -143,7 +148,7 @@ namespace QuickBite__Food_Ordering_System
 
             int orderId = Convert.ToInt32(cmd.ExecuteScalar());
 
-           
+            // 5. Insert Order Items
             foreach (DataRow dr in cartItems.Rows)
             {
                 cmd = new SqlCommand(
@@ -154,7 +159,7 @@ namespace QuickBite__Food_Ordering_System
                 cmd.ExecuteNonQuery();
             }
 
-           
+            // 6. Clear user's cart
             cmd = new SqlCommand("DELETE FROM MenuCart_tbl WHERE User_Cart_Id='" + uid + "'", con);
             cmd.ExecuteNonQuery();
 
