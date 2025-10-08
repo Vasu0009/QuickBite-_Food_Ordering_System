@@ -105,7 +105,7 @@ namespace QuickBite__Food_Ordering_System
             row = ds.Tables[0].Rows.Count;
 
             pg.AllowPaging = true;
-            pg.PageSize = 3;
+            pg.PageSize = 6;
             pg.CurrentPageIndex = Convert.ToInt32(ViewState["pid"]);
 
             pg.DataSource = ds.Tables[0].DefaultView;

@@ -8,6 +8,10 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+using CrystalDecisions.Web.Design;
+
 
 namespace QuickBite__Food_Ordering_System.Admin
 {
@@ -19,6 +23,11 @@ namespace QuickBite__Food_Ordering_System.Admin
         DataSet ds;
         SqlCommand cmd;
         string fnm;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string Crypath = "";
+
+
 
         void getcon()
         {
@@ -161,5 +170,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 BindMenuItems();
             }
         }
+
+       
     }
 }

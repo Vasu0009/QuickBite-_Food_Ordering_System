@@ -100,7 +100,6 @@ namespace QuickBite__Food_Ordering_System
             if (ds.Tables[0].Rows.Count == 0)
             {
                 lblMessage.Text = "User not found.";
-                con.Close();
                 return;
             }
 
@@ -115,7 +114,6 @@ namespace QuickBite__Food_Ordering_System
             if (cartItems.Rows.Count == 0)
             {
                 lblMessage.Text = "Your cart is empty.";
-                con.Close();
                 return;
             }
 
@@ -171,7 +169,7 @@ namespace QuickBite__Food_Ordering_System
             lblSubtotal.Text = "₹0.00";
             lblTotalAmount.Text = "₹0.00";
 
-            con.Close();
+           
         }
 
         protected void btnBackToCart_Click(object sender, EventArgs e)

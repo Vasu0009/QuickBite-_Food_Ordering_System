@@ -74,7 +74,7 @@ namespace QuickBite__Food_Ordering_System
         {
             getcon();
 
-            // Retrieve user info
+          
             da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -83,10 +83,8 @@ namespace QuickBite__Food_Ordering_System
             {
                 int userid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
 
-                // Rebind the grid to ensure latest data
                 fillGrid();
 
-                // Calculate the total of all items in the cart
                 decimal finalTotal = 0;
                 foreach (GridViewRow row in gvCart.Rows)
                 {
@@ -101,7 +99,6 @@ namespace QuickBite__Food_Ordering_System
                     }
                 }
 
-                // Display the total in the label
                 lblFinalTotal.Text = "Final Total: ₹" + finalTotal.ToString("F2");
             }
         }
@@ -128,7 +125,6 @@ namespace QuickBite__Food_Ordering_System
                 int userid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
                 fillGrid();
 
-                // Calculate final total
                 decimal finalTotal = 0;
                 foreach (GridViewRow row in gvCart.Rows)
                 {
