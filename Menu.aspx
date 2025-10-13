@@ -288,7 +288,7 @@
                         </ul>
                     </li>
                     <li class="nav-item user-info" style="display: none;">
-                        <!-- User dropdown will be populated by JavaScript -->
+                        <!--User dropdown will be populated by JavaScript -->
                     </li>
                 </ul>
             </div>
