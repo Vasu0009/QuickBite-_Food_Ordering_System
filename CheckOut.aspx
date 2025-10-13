@@ -17,7 +17,7 @@
         <asp:Label ID="lblMessage" runat="server" CssClass="alert alert-danger d-none" role="alert"></asp:Label>
 
         <div class="row">
-            <!-- Left Column - Order Details -->
+            <!-- Left Column - Order Details    -->
             <div class="col-lg-7">
                 <!-- Shipping Address Section -->
                 <div class="card checkout-card">
