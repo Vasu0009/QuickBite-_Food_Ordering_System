@@ -80,7 +80,7 @@
             </div>
 
             <div class="mt-4">
-                <%--                <asp:Button ID="btnUpd" runat="server" Text="Update Cart" CssClass="btn btn-warning me-2" OnClick="btnUpd_Click" />--%>
+                <%--<asp:Button ID="btnUpd" runat="server" Text="Update Cart" CssClass="btn btn-warning me-2" OnClick="btnUpd_Click" />--%>
                 <asp:Button ID="btnUpd" runat="server" Text="Update Cart"  OnClick="CalculateFinalTotal" />
                 <asp:Button ID="btnchkOut" runat="server" Text="Check Out" OnClick="btnchkOut_Click"  />
 
