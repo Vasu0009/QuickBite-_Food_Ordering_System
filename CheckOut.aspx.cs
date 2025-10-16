@@ -81,8 +81,6 @@ namespace QuickBite__Food_Ordering_System
 
             con.Close();
         }
-
-
         protected void btnPlaceOrder_Click(object sender, EventArgs e)
         {
             getcon();
