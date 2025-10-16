@@ -8,10 +8,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 
-using System.Data.SqlClient;
-using System.Data;
-using System.Configuration;
-
 namespace QuickBite__Food_Ordering_System
 {
     public partial class Cart : System.Web.UI.Page
@@ -73,53 +69,23 @@ namespace QuickBite__Food_Ordering_System
             }
         }
 
-        
-            protected void btnUpd_Click(object sender, EventArgs e)
-        {
-            getcon();
 
-          
-            da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                int userid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-
-                fillGrid();
-
-                decimal finalTotal = 0;
-                foreach (GridViewRow row in gvCart.Rows)
-                {
-                    Label lblTotal = row.FindControl("Label4") as Label;
-                    if (lblTotal != null)
-                    {
-                        string totalText = lblTotal.Text.Replace("₹", "").Trim();
-                        if (decimal.TryParse(totalText, out decimal itemTotal))
-                        {
-                            finalTotal += itemTotal;
-                        }
-                    }
-                }
-
-                lblFinalTotal.Text = "Final Total: ₹" + finalTotal.ToString("F2");
-            }
-        }
-        
 
         protected void Continue_Shopping_Click(object sender, EventArgs e)
         {
             Response.Redirect("Menu.aspx");
         }
 
-       
-        protected void CalculateFinalTotal(object sender, EventArgs e)
-        {
-            
-            getcon();
 
-           
+
+        protected void btnchkOut_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("CheckOut.aspx");
+        }
+
+        protected void btnUpd_Click1(object sender, EventArgs e)
+        {
+            getcon();
             da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -146,12 +112,8 @@ namespace QuickBite__Food_Ordering_System
                 lblFinalTotal.Text = "Final Total: ₹" + finalTotal.ToString("F2");
                 lblFinalTotal.ForeColor = System.Drawing.Color.DarkGreen;
                 lblFinalTotal.Font.Bold = true;
-            }
-        }
 
-        protected void btnchkOut_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("CheckOut.aspx");
+            }
         }
 
         protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -205,14 +167,6 @@ namespace QuickBite__Food_Ordering_System
                     cmd.ExecuteNonQuery();
                     fillGrid();
                 }
-            }
-        }
-    }
-}
-            getcon();
-            if (Session["user"] == null)
-            {
-                Response.Redirect("Login.aspx");
             }
 
             da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
@@ -224,87 +178,6 @@ namespace QuickBite__Food_Ordering_System
             lblmsg.Text = "Welcome, " + Q;
 
             fillGrid();
-
         }
-
-        void fillGrid()
-        {
-            getcon();
-            da = new SqlDataAdapter("Select * from register_tbl where Email_Address ='" + Session["user"].ToString() + "'", con);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            int userid = Convert.ToInt16(ds.Tables[0].Rows[0][0]);
-            da = new SqlDataAdapter("Select * from MenuCart_tbl where User_Cart_Id='" + userid + "'", con);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            gvCart.DataSource = ds;
-            gvCart.DataBind();
-        }
-
-        protected void btnUpd_Click(object sender, EventArgs e)
-        {
-          
-          
-        }
-
-        protected void gvCart_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "cmd_remove")
-            {
-                int cartid = Convert.ToInt32(e.CommandArgument);
-                getcon();
-                cmd = new SqlCommand("Delete from MenuCart_tbl where Cart_Id='" + cartid + "'", con);
-                cmd.ExecuteNonQuery();
-                fillGrid();
-            }
-            else if (e.CommandName == "cmd_minus")
-            {
-                int cartid = Convert.ToInt32(e.CommandArgument);
-                getcon();
-                da = new SqlDataAdapter("Select * from MenuCart_tbl where Cart_Id='" + cartid + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
-
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    int quant = Convert.ToInt32(ds.Tables[0].Rows[0][4]);
-                    int price = Convert.ToInt32(ds.Tables[0].Rows[0][5]);
-
-                    if (quant > 1)
-                    {
-                        quant--;
-                        Int64 tot = quant * price;
-                        cmd = new SqlCommand("Update MenuCart_tbl set C_Menu_Quant='" + quant + "', C_Menu_Total='" + tot + "' where Cart_Id='" + cartid + "'", con);
-                        cmd.ExecuteNonQuery();
-                        fillGrid();
-                    }
-                }
-            }
-            else if (e.CommandName == "cmd_plus")
-            {
-                int cartid = Convert.ToInt32(e.CommandArgument);
-                getcon();
-                da = new SqlDataAdapter("Select * from MenuCart_tbl where Cart_Id='" + cartid + "'", con);
-                ds = new DataSet();
-                da.Fill(ds);
-
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    int quant = Convert.ToInt32(ds.Tables[0].Rows[0][4]);
-                    int price = Convert.ToInt32(ds.Tables[0].Rows[0][5]);
-                    quant++;
-                    Int64 total = quant * price;
-                    cmd = new SqlCommand("Update MenuCart_tbl set C_Menu_Quant='" + quant + "', C_Menu_Total='" + total + "' where Cart_Id='" + cartid + "'", con);
-                    cmd.ExecuteNonQuery();
-                    fillGrid();
-                }
-            }
-        }
-
-        
-
-  
     }
 }

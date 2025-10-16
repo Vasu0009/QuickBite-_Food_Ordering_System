@@ -8,6 +8,10 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 
+using CrystalDecisions.CrystalReports.Engine;
+
+using CrystalDecisions.Shared;
+
 
 namespace QuickBite__Food_Ordering_System
 {
@@ -19,6 +23,11 @@ namespace QuickBite__Food_Ordering_System
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+
+        static string Crypath = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             getcon();
@@ -59,6 +68,30 @@ namespace QuickBite__Food_Ordering_System
             }
 
         }
+
+        protected void rept1_Click(object sender, EventArgs e)
+        {
+
+            da = new SqlDataAdapter("select * from register_tbl", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = @"E:\SEM-5\ASP.NET\QuickBite _Food_Ordering_System\User_Data.xml";
+            ds.WriteXmlSchema(xml);
+            ds.WriteXml(xml);
+
+            Crypath = @"E:\SEM-5\ASP.NET\QuickBite _Food_Ordering_System\Register.rpt";
+            cr.Load(Crypath);
+            cr.SetDataSource(ds);
+            CrystalReportViewer1.ReportSource = cr;
+            CrystalReportViewer1.RefreshReport();
+
+
+
+
+
+
+        }
+
 
 
     }

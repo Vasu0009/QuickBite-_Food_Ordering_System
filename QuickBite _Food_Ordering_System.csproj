@@ -164,6 +164,10 @@
     <Content Include="css\CheckOut.css" />
     <Content Include="css\MenuDetails.css" />
     <Content Include="css\style.css" />
+    <Content Include="Database\App_Data\User.mdf" />
+    <Content Include="Database\App_Data\User_log.ldf">
+      <DependentUpon>User.mdf</DependentUpon>
+    </Content>
     <Content Include="Home.aspx" />
     <Content Include="js\admin.js" />
     <Content Include="js\auth.js" />
@@ -309,6 +313,12 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="user_data.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>user_data.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\admin.Master" />
@@ -323,6 +333,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MenuImg\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="user_data.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>user_data.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
