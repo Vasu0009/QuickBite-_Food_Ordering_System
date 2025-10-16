@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/QuickBite.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Register" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
@@ -354,6 +356,8 @@
                             <div id="alertContainer"></div>
 
                             <form id="registerForm" novalidate>
+                                <asp:Button ID="rept1" runat="server" Text="Report" OnClick="rept1_Click" />
+                                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                                 <!-- Name Fields -->
                                 <div class="form-row">
                                     <div class="form-floating">

@@ -1,9 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="Add_Menu.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Admin.Add_MenuAdmin" %>
-
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <body>
         <nav class="navbar navbar-dark bg-dark">
@@ -11,7 +11,7 @@
                 <a class="navbar-brand fw-bold" href="Dashboard.aspx">QuickBite Admin</a>
                 <div class="d-flex align-items-center gap-3">
                     <a class="btn btn-sm btn-outline-light" href="../Home.aspx">View Site</a>
-                    <asp:Button ID="btnLogout" runat="server" Text="Logout" class="btn btn-sm btn-warning" />
+                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-sm btn-warning" />
                 </div>
             </div>
         </nav>
@@ -28,12 +28,15 @@
                         <a href="Reports.aspx" class="list-group-item list-group-item-action"><i class="bi bi-graph-up me-2"></i>Reports</a>
                     </div>
                 </aside>
+
                 <main class="col-md-9 col-lg-10 ms-sm-auto px-4 py-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h4 mb-0">Menu Items</h1>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#menuModal" onclick="clearForm()">
-                            <i class="bi bi-plus-circle me-1"></i>Add Menu Item
-                        </button>
+                        <div>
+                            <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#menuModal" onclick="clearForm()">
+                                <i class="bi bi-plus-circle me-1"></i>Add Menu Item
+                            </button>
+                        </div>
                     </div>
 
                     <div class="card">
@@ -67,9 +70,8 @@
                                         <asp:TemplateField HeaderText="Actions">
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-sm btn-outline-primary me-1"
-                                                    CommandArgument='<%# Eval("Id") %>' CommandName="cmd_edt"
-                                                    ToolTip="Edit">
-                                                     <i class="bi bi-pencil"></i>
+                                                    CommandArgument='<%# Eval("Id") %>' CommandName="cmd_edt" ToolTip="Edit">
+                                                    <i class="bi bi-pencil"></i>
                                                 </asp:LinkButton>
                                                 <asp:LinkButton ID="btnDelete" runat="server" CssClass="btn btn-sm btn-outline-danger"
                                                     CommandArgument='<%# Eval("Id") %>' CommandName="cmd_dlt"
@@ -88,6 +90,9 @@
                                 </asp:GridView>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="mt-3">
                     </div>
 
                     <!-- Add Menu Item Modal -->
@@ -140,20 +145,6 @@
         </div>
 
         <script>
-            // Function to show the modal
-            function showModal() {
-                var myModal = new bootstrap.Modal(document.getElementById('menuModal'));
-                myModal.show();
-            }
-
-            // Function to close the modal
-            function closeModal() {
-                var myModalEl = document.getElementById('menuModal');
-                var modal = bootstrap.Modal.getInstance(myModalEl);
-                modal.hide();
-            }
-
-            // Function to clear form when adding new item
             function clearForm() {
                 document.getElementById('<%= hdnItemId.ClientID %>').value = "0";
                 document.getElementById('<%= txtName.ClientID %>').value = "";
@@ -163,12 +154,8 @@
                 document.getElementById('<%= lblModalTitle.ClientID %>').innerText = "Add Menu Item";
                 document.getElementById('<%= btnSave.ClientID %>').innerText = "Save Item";
                 document.getElementById('<%= hdnCurrentImage.ClientID %>').value = "";
-
-                // Reset category dropdown
                 var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
-                if (categoryDropdown.options.length > 0) {
-                    categoryDropdown.selectedIndex = 0;
-                }
+                if (categoryDropdown.options.length > 0) categoryDropdown.selectedIndex = 0;
             }
         </script>
     </body>
