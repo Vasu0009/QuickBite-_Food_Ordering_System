@@ -42,15 +42,6 @@ namespace QuickBite__Food_Ordering_System.Admin
         protected global::System.Web.UI.WebControls.Label lblModalTitle;
 
         /// <summary>
-        /// hdnItemId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnItemId;
-
-        /// <summary>
         /// txtName control.
         /// </summary>
         /// <remarks>
@@ -85,15 +76,6 @@ namespace QuickBite__Food_Ordering_System.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fldimg;
-
-        /// <summary>
-        /// hdnCurrentImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnCurrentImage;
 
         /// <summary>
         /// txtDescription control.

@@ -11,7 +11,7 @@
                 <a class="navbar-brand fw-bold" href="Dashboard.aspx">QuickBite Admin</a>
                 <div class="d-flex align-items-center gap-3">
                     <a class="btn btn-sm btn-outline-light" href="../Home.aspx">View Site</a>
-                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-sm btn-warning" />
+                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-sm btn-warning" OnClick="btnLogout_Click" />
                 </div>
             </div>
         </nav>
@@ -106,7 +106,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <asp:HiddenField ID="hdnItemId" runat="server" Value="0" />
                                     <div class="mb-3">
                                         <label class="form-label">Name *</label>
                                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control" required></asp:TextBox>
@@ -125,7 +124,6 @@
                                         <label class="form-label">Image *</label>
                                         <asp:FileUpload ID="fldimg" runat="server" CssClass="form-control" />
                                         <small class="form-text text-muted">Leave empty to keep current image when editing</small>
-                                        <asp:HiddenField ID="hdnCurrentImage" runat="server" />
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Description *</label>
@@ -146,14 +144,12 @@
 
         <script>
             function clearForm() {
-                document.getElementById('<%= hdnItemId.ClientID %>').value = "0";
                 document.getElementById('<%= txtName.ClientID %>').value = "";
                 document.getElementById('<%= txtPrice.ClientID %>').value = "";
                 document.getElementById('<%= txtDescription.ClientID %>').value = "";
                 document.getElementById('<%= fldimg.ClientID %>').value = "";
                 document.getElementById('<%= lblModalTitle.ClientID %>').innerText = "Add Menu Item";
                 document.getElementById('<%= btnSave.ClientID %>').innerText = "Save Item";
-                document.getElementById('<%= hdnCurrentImage.ClientID %>').value = "";
                 var categoryDropdown = document.getElementById('<%= ddlCategory.ClientID %>');
                 if (categoryDropdown.options.length > 0) categoryDropdown.selectedIndex = 0;
             }

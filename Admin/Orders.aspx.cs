@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
+using CrystalDecisions.Shared;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace QuickBite__Food_Ordering_System.Admin
 {
@@ -13,6 +15,10 @@ namespace QuickBite__Food_Ordering_System.Admin
         SqlDataAdapter da;
         DataSet ds;
         SqlCommand cmd;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+
+        static string Crypath = "";
 
         void getcon()
         {
@@ -86,6 +92,27 @@ namespace QuickBite__Food_Ordering_System.Admin
             Session.Abandon();
             Response.Redirect("../Login.aspx");
             Response.Redirect("LoginAdmin.aspx");
+        }
+
+        protected void btnReport_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from Orders", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/Orders_Data.xml";
+            ds.WriteXmlSchema(xml);
+
+            Crypath = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/Orders_info.rpt";
+            cr.Load(Crypath);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+
+
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "Orders");
+
         }
     }
 }

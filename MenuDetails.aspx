@@ -1,12 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/QuickBite.Master" AutoEventWireup="true" CodeBehind="MenuDetails.aspx.cs" Inherits="QuickBite__Food_Ordering_System.MenuDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   
+
 </asp:Content>
 
 <asp:Content ID="Content6" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <link href="css/MenuDetails.css" rel="stylesheet" />
+
         <div class="container">
             <a class="navbar-brand fw-bold" href="Home.aspx">QuickBite <i class="bi bi-cup-hot-fill text-warning ms-2"></i></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -18,12 +20,11 @@
                     <li class="nav-item"><a class="nav-link" href="Menu.aspx">Menu</a></li>
                     <li class="nav-item"><a class="nav-link" href="About.aspx">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="Contact.aspx">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-cart3"></i> Cart <span id="cart-count" class="badge bg-warning text-dark">0</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="Cart.aspx"><i class="bi bi-cart3"></i> Cart <span id="cart-count" class="badge bg-warning text-dark">0</span></a></li>
                     <li class="nav-item dropdown auth-link login-link">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle"></i> Account
                         </a>
-                        <link href="css/MenuDetails.css" rel="stylesheet" />
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="Login.aspx"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
                             <li><a class="dropdown-item" href="Register.aspx"><i class="bi bi-person-plus me-2"></i>Register</a></li>
@@ -40,14 +41,15 @@
 
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <!-- Menu Details Section -->
-    <section class="menu-details-section">
+    <section class="menu-details-section py-5 mt-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
                     <asp:DataList ID="dtlMainDish" runat="server" 
                         RepeatDirection="Horizontal" 
                         RepeatLayout="Flow" 
-                        CssClass="main-dish-datalist">
+                        CssClass="main-dish-datalist"
+                        OnItemCommand="dtlMainDish_ItemCommand">
                         <ItemTemplate>
                             <div class="dish-card">
                                 <div class="row g-0 align-items-center">
@@ -76,8 +78,8 @@
                                             </div>
 
                                             <div class="action-buttons">
-                                                <asp:Button ID="btnAddToCart" runat="server"
-                                                    Text="🛒 Add to Cart"
+                                                <asp:LinkButton ID="btnAddToCart" runat="server"
+                                                    Text='<i class="bi bi-cart3 me-2"></i>Add to Cart'
                                                     CssClass="btn btn-add-cart"
                                                     CommandName="AddToCart"
                                                     CommandArgument='<%# Eval("Id") %>' />

@@ -1,7 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="Add_Categories.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Admin.Add_Categories" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function clearForm() {
+            document.getElementById('<%= txtName.ClientID %>').value = '';
+            document.getElementById('<%= txtSlug.ClientID %>').value = '';
+            document.getElementById('<%= txtDescription.ClientID %>').value = '';
+            document.getElementById('<%= lblModalTitle.ClientID %>').innerText = 'Add Category';
+            document.getElementById('<%= btnSave.ClientID %>').innerText = 'Save Category';
+        }
+    </script>
 </asp:Content>
+
 <asp:Content ID="Content3" runat="server" ContentPlaceHolderID="ContentPlaceHolder2">
     <body>
         <nav class="navbar navbar-dark bg-dark">
@@ -29,9 +41,12 @@
                 <main class="col-md-9 col-lg-10 ms-sm-auto px-4 py-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h4 mb-0">Categories</h1>
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="clearForm()">
-                            <i class="bi bi-plus-circle me-1"></i>Add Category
-                        </button>
+                        <div>
+                            <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="clearForm()">
+                                <i class="bi bi-plus-circle me-1"></i>Add Category
+                            </button>
+                            
+                        </div>
                     </div>
 
                     <div class="card">
@@ -40,6 +55,7 @@
                                 <asp:GridView ID="gvCategories" runat="server" AutoGenerateColumns="False"
                                     CssClass="table table-hover align-middle mb-0" DataKeyNames="CategoryId"
                                     OnRowCommand="gvCategories_RowCommand">
+
                                     <Columns>
                                         <asp:BoundField DataField="CategoryId" HeaderText="ID" ReadOnly="true" />
                                         <asp:TemplateField HeaderText="Name">
@@ -59,7 +75,8 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Update">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton1" runat="server" CssClass="btn btn-sm btn-outline-primary" CommandName="cmd_edt" CommandArgument='<%# Eval("CategoryId") %>'>  
+                                                <asp:LinkButton ID="btnEdit" runat="server" CssClass="btn btn-sm btn-outline-primary"
+                                                    CommandName="cmd_edt" CommandArgument='<%# Eval("CategoryId") %>'>  
                                                     <i class="bi bi-pencil-square me-1"></i>Edit
                                                 </asp:LinkButton>
                                             </ItemTemplate>
@@ -67,7 +84,7 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Delete">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="LinkButton2" runat="server"
+                                                <asp:LinkButton ID="btnDelete" runat="server"
                                                     CssClass="btn btn-sm btn-outline-danger"
                                                     CommandName="cmd_dlt"
                                                     CommandArgument='<%# Eval("CategoryId") %>'
@@ -87,7 +104,9 @@
                             </div>
                         </div>
                     </div>
+
                     
+
                     <!-- Add/Edit Category Modal -->
                     <div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
@@ -96,7 +115,7 @@
                                     <h5 class="modal-title">
                                         <asp:Label ID="lblModalTitle" runat="server" Text="Add Category"></asp:Label>
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="clearForm()"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
@@ -113,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearForm()">Cancel</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     <asp:Button ID="btnSave" runat="server" Text="Save Category"
                                         CssClass="btn btn-warning" OnClick="btnSave_Click" />
                                 </div>
@@ -124,31 +143,7 @@
             </div>
         </div>
 
-        <script>
-            // Function to open the modal
-            function openModal() {
-                var myModal = new bootstrap.Modal(document.getElementById('categoryModal'));
-                myModal.show();
-            }
-
-           <%-- // Auto-generate slug from category name
-            document.getElementById('<%= txtName.ClientID %>').addEventListener('input', function () {
-                const name = this.value;
-                const slug = name.toLowerCase()
-                    .replace(/[^a-z0-9\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-')
-                    .trim();
-                document.getElementById('<%= txtSlug.ClientID %>').value = slug;
-            });--%>
-            
-        <%--    function clearForm() {
-                document.getElementById('<%= txtName.ClientID %>').value = '';
-                document.getElementById('<%= txtSlug.ClientID %>').value = '';
-                document.getElementById('<%= txtDescription.ClientID %>').value = '';
-                document.getElementById('<%= lblModalTitle.ClientID %>').innerText = 'Add Category';
-                document.getElementById('<%= btnSave.ClientID %>').innerText = 'Save Category';
-            }--%>
-      </script>
+        <!-- Bootstrap JS Bundle (includes Popper) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </asp:Content>

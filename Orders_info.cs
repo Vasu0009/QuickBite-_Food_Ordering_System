@@ -16,14 +16,14 @@ namespace QuickBite__Food_Ordering_System {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class user_data : ReportClass {
+    public class Orders_info : ReportClass {
         
-        public user_data() {
+        public Orders_info() {
         }
         
         public override string ResourceName {
             get {
-                return "user_data.rpt";
+                return "Orders_info.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace QuickBite__Food_Ordering_System {
         
         public override string FullResourceName {
             get {
-                return "QuickBite__Food_Ordering_System.user_data.rpt";
+                return "QuickBite__Food_Ordering_System.Orders_info.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace QuickBite__Food_Ordering_System {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class Cacheduser_data : Component, ICachedReport {
+    public class CachedOrders_info : Component, ICachedReport {
         
-        public Cacheduser_data() {
+        public CachedOrders_info() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace QuickBite__Food_Ordering_System {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            user_data rpt = new user_data();
+            Orders_info rpt = new Orders_info();
             rpt.Site = this.Site;
             return rpt;
         }

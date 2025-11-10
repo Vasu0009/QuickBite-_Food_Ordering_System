@@ -4,14 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using CrystalDecisions.Web.Design;
-
 
 namespace QuickBite__Food_Ordering_System.Admin
 {
@@ -27,8 +25,6 @@ namespace QuickBite__Food_Ordering_System.Admin
         private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
         static string Crypath = "";
 
-
-
         void getcon()
         {
             con = new SqlConnection(s);
@@ -41,15 +37,12 @@ namespace QuickBite__Food_Ordering_System.Admin
             {
                 Response.Redirect("LoginAdmin.aspx");
             }
-            else
-            {
-                getcon();
-                if (!IsPostBack)
-                {
-                    fillCategory();
-                    BindMenuItems();
-                }
 
+            getcon();
+            if (!IsPostBack)
+            {
+                fillCategory();
+                BindMenuItems();
             }
         }
 
@@ -69,6 +62,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 fldimg.SaveAs(Server.MapPath(fnm));
             }
         }
+
         void fillCategory()
         {
             getcon();
@@ -83,7 +77,6 @@ namespace QuickBite__Food_Ordering_System.Admin
                 ddlCategory.Items.Add(ds.Tables[0].Rows[i][1].ToString());
             }
         }
-
 
         void BindMenuItems()
         {
@@ -103,13 +96,24 @@ namespace QuickBite__Food_Ordering_System.Admin
             da = new SqlDataAdapter("SELECT Id, Name, Price, CategoryId, Image, [Description] AS Description FROM Add_MenuItems WHERE Id='" + id + "'", con);
             ds = new DataSet();
             da.Fill(ds);
-            txtName.Text = ds.Tables[0].Rows[0]["Name"].ToString();
-            txtPrice.Text = ds.Tables[0].Rows[0]["Price"].ToString();
-            ddlCategory.SelectedItem.Text = ds.Tables[0].Rows[0]["CategoryId"].ToString();
-            txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
+
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                txtName.Text = ds.Tables[0].Rows[0]["Name"].ToString();
+                txtPrice.Text = ds.Tables[0].Rows[0]["Price"].ToString();
+                txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
+
+                string categoryId = ds.Tables[0].Rows[0]["CategoryId"].ToString();
+                da = new SqlDataAdapter("SELECT Name FROM Add_Category WHERE CategoryId='" + categoryId + "'", con);
+                DataSet dsCategory = new DataSet();
+                da.Fill(dsCategory);
+
+                if (dsCategory.Tables[0].Rows.Count > 0)
+                {
+                    ddlCategory.SelectedItem.Text = dsCategory.Tables[0].Rows[0]["Name"].ToString();
+                }
+            }
         }
-
-
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
@@ -123,7 +127,6 @@ namespace QuickBite__Food_Ordering_System.Admin
                 Response.Write("<script>alert('Menu item added successfully.')</script>");
                 clear();
                 BindMenuItems();
-
             }
             else if (btnSave.Text == "Update Item")
             {
@@ -136,8 +139,10 @@ namespace QuickBite__Food_Ordering_System.Admin
                 clear();
                 BindMenuItems();
                 btnSave.Text = "Save Item";
-
+                lblModalTitle.Text = "Add Menu Item";
             }
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "closeModal", "var modal = new bootstrap.Modal(document.getElementById('menuModal')); modal.hide();", true);
         }
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -147,8 +152,6 @@ namespace QuickBite__Food_Ordering_System.Admin
             da.Fill(ds);
 
             ViewState["cid"] = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-
-            ClientScript.RegisterStartupScript(this.GetType(), "Popup", "showModal();", true);
         }
 
         protected void gvMenuItems_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -160,6 +163,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 selectMenuItem();
                 btnSave.Text = "Update Item";
                 lblModalTitle.Text = "Edit Menu Item";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "var modal = new bootstrap.Modal(document.getElementById('menuModal')); modal.show();", true);
             }
             else if (e.CommandName == "cmd_dlt")
             {
@@ -171,7 +175,10 @@ namespace QuickBite__Food_Ordering_System.Admin
             }
         }
 
-
-
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session["admin"] = null;
+            Response.Redirect("LoginAdmin.aspx");
+        }
     }
 }

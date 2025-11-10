@@ -1,66 +1,22 @@
 <?xml version="1.0" standalone="yes"?>
-<NewDataSet>
-  <Table>
-    <Id>1</Id>
-    <First_Name>Vasu</First_Name>
-    <Last_Name>Padariya</Last_Name>
-    <Email_Address>vasupadariya166@rkiu.ac.in</Email_Address>
-    <Phone_Number>9687075230</Phone_Number>
-    <Delivery_Address>Navahadh</Delivery_Address>
-    <Password>v1v1v1v1</Password>
-  </Table>
-  <Table>
-    <Id>2</Id>
-    <First_Name>Vasu</First_Name>
-    <Last_Name>Padariya</Last_Name>
-    <Email_Address>vasupadariya166@rkiu.ac.in</Email_Address>
-    <Phone_Number>9687075230</Phone_Number>
-    <Delivery_Address>Navahadh</Delivery_Address>
-    <Password>v1v1v1v1</Password>
-  </Table>
-  <Table>
-    <Id>3</Id>
-    <First_Name>Vasu</First_Name>
-    <Last_Name>Padariya</Last_Name>
-    <Email_Address>vasupadariya166@rkiu.ac.in</Email_Address>
-    <Phone_Number>9687075230</Phone_Number>
-    <Delivery_Address>Navahadh</Delivery_Address>
-    <Password>v1v1v1v1</Password>
-  </Table>
-  <Table>
-    <Id>4</Id>
-    <First_Name>dd</First_Name>
-    <Last_Name>asdas</Last_Name>
-    <Email_Address>vasupadariya166@rkiu.ac.in</Email_Address>
-    <Phone_Number>9632587412</Phone_Number>
-    <Delivery_Address>Navahadh</Delivery_Address>
-    <Password>12345qwe</Password>
-  </Table>
-  <Table>
-    <Id>5</Id>
-    <First_Name>Rutu</First_Name>
-    <Last_Name>Zala</Last_Name>
-    <Email_Address>rzala140@rku.ac.in</Email_Address>
-    <Phone_Number>8050203010</Phone_Number>
-    <Delivery_Address>Sadher</Delivery_Address>
-    <Password>r3r3r3r3</Password>
-  </Table>
-  <Table>
-    <Id>6</Id>
-    <First_Name>Vasu</First_Name>
-    <Last_Name>Padariya</Last_Name>
-    <Email_Address>vasupadariya166@rkiu.ac.in</Email_Address>
-    <Phone_Number>9687075230</Phone_Number>
-    <Delivery_Address>Navahadh</Delivery_Address>
-    <Password>v1v1v1v1</Password>
-  </Table>
-  <Table>
-    <Id>7</Id>
-    <First_Name />
-    <Last_Name />
-    <Email_Address />
-    <Phone_Number />
-    <Delivery_Address />
-    <Password />
-  </Table>
-</NewDataSet>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Table">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" type="xs:int" minOccurs="0" />
+              <xs:element name="First_Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Last_Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Email_Address" type="xs:string" minOccurs="0" />
+              <xs:element name="Phone_Number" type="xs:string" minOccurs="0" />
+              <xs:element name="Delivery_Address" type="xs:string" minOccurs="0" />
+              <xs:element name="Password" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

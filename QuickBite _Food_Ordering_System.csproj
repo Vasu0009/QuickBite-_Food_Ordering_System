@@ -298,6 +298,12 @@
     <Compile Include="MenuDetails.aspx.designer.cs">
       <DependentUpon>MenuDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Orders_info.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Orders_info.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuickBite.Master.cs">
       <DependentUpon>QuickBite.Master</DependentUpon>
@@ -313,10 +319,10 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="user_data.cs">
+    <Compile Include="User_info.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>user_data.rpt</DependentUpon>
+      <DependentUpon>User_info.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -338,9 +344,13 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="user_data.rpt">
+    <EmbeddedResource Include="Orders_info.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>user_data.cs</LastGenOutput>
+      <LastGenOutput>Orders_info.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User_info.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>User_info.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

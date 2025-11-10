@@ -70,55 +70,22 @@ namespace QuickBite__Food_Ordering_System
         }
 
 
-        protected void btnUpd_Click(object sender, EventArgs e)
-        {
-            getcon();
 
         protected void Continue_Shopping_Click(object sender, EventArgs e)
         {
             Response.Redirect("Menu.aspx");
         }
-            da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
-            ds = new DataSet();
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count > 0)
-            {
-                int userid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
-
-                fillGrid();
-
-                decimal finalTotal = 0;
-                foreach (GridViewRow row in gvCart.Rows)
-                {
-                    Label lblTotal = row.FindControl("Label4") as Label;
-                    if (lblTotal != null)
-                    {
-                        string totalText = lblTotal.Text.Replace("₹", "").Trim();
-                        if (decimal.TryParse(totalText, out decimal itemTotal))
-                        {
-                            finalTotal += itemTotal;
-                        }
-                    }
-                }
 
 
 
         protected void btnchkOut_Click(object sender, EventArgs e)
-                lblFinalTotal.Text = "Final Total: ₹" + finalTotal.ToString("F2");
-            }
-        }
-
-        protected void Continue_Shopping_Click(object sender, EventArgs e)
         {
             Response.Redirect("CheckOut.aspx");
         }
 
         protected void btnUpd_Click1(object sender, EventArgs e)
-        protected void CalculateFinalTotal(object sender, EventArgs e)
         {
             getcon();
-
             da = new SqlDataAdapter("Select * from register_tbl where Email_Address='" + Session["user"].ToString() + "'", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -187,7 +154,7 @@ namespace QuickBite__Food_Ordering_System
                 int cartid = Convert.ToInt32(e.CommandArgument);
                 getcon();
                 da = new SqlDataAdapter("Select * from MenuCart_tbl where Cart_Id='" + cartid + "'", con);
-                ds = new DataSet();
+                ds = new DataSet(); 
                 da.Fill(ds);
 
                 if (ds.Tables[0].Rows.Count > 0)
@@ -211,8 +178,6 @@ namespace QuickBite__Food_Ordering_System
             lblmsg.Text = "Welcome, " + Q;
 
             fillGrid();
-        }
-            }
         }
     }
 }

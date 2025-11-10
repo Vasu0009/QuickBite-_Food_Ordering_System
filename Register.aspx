@@ -348,6 +348,8 @@
                             <div class="mb-3">
                                 <i class="bi bi-cup-hot-fill" style="font-size: 2.5rem;"></i>
                             </div>
+                            <asp:Button ID="rept1" runat="server" Text="Report" OnClick="rept1_Click" />
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                             <h2>Create Account</h2>
                             <p class="mb-0">Join QuickBite and start ordering delicious meals</p>
                         </div>
@@ -356,8 +358,7 @@
                             <div id="alertContainer"></div>
 
                             <form id="registerForm" novalidate>
-                                <asp:Button ID="rept1" runat="server" Text="Report" OnClick="rept1_Click" />
-                                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+
                                 <!-- Name Fields -->
                                 <div class="form-row">
                                     <div class="form-floating">
@@ -543,6 +544,7 @@
         </div>
     </div>
 </asp:Content>
+
 <asp:Content ID="Content6" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -572,4 +574,5 @@
             </div>
         </div>
     </nav>
+
 </asp:Content>
