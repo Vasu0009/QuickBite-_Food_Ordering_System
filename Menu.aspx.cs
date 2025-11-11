@@ -8,6 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace QuickBite__Food_Ordering_System
 {
@@ -20,6 +22,9 @@ namespace QuickBite__Food_Ordering_System
         SqlCommand cmd;
         PagedDataSource pg = new PagedDataSource();
         int row;
+
+        private CrystalDecisions.CrystalReports.Engine.ReportDocument cr = new ReportDocument();
+        static string Crypath = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,6 +40,8 @@ namespace QuickBite__Food_Ordering_System
             string s = ds.Tables[0].Rows[0][1].ToString();
             lbl.Text = "Welcome, " + s;
             fillDataList();
+            CrystalReportViewer1.Visible = false;
+
         }
 
         void getcon()
@@ -96,7 +103,7 @@ namespace QuickBite__Food_Ordering_System
             }
             else if (e.CommandName == "cmd_cart")
             {
-               
+
                 da = new SqlDataAdapter("Select * from register_tbl where Email_Address ='" + Session["user"] + "'", con);
                 ds = new DataSet();
                 da.Fill(ds);
@@ -113,7 +120,7 @@ namespace QuickBite__Food_Ordering_System
                 int total = Convert.ToInt32(menuprice) * quant;
                 string menuimg = ds.Tables[0].Rows[0]["Image"].ToString();
 
-               
+
                 cmd = new SqlCommand("Insert into MenuCart_tbl (User_Cart_Id, Menu_Cart_Id, C_Menu_Name, C_Menu_Quant, C_Menu_Price, C_Menu_Total, C_Menu_Img) " +
                                      "values('" + userid + "','" + menuid + "','" + menuname + "','" + quant + "','" + menuprice + "','" + total + "','" + menuimg + "')", con);
                 cmd.ExecuteNonQuery();
@@ -139,6 +146,30 @@ namespace QuickBite__Food_Ordering_System
 
             dtlsmenu.DataSource = pg;
             dtlsmenu.DataBind();
+        }
+
+
+
+        protected void reportbtn_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from Add_MenuItems", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/MenuItem_user.xml";
+            ds.WriteXmlSchema(xml);
+
+
+            Crypath = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/Menu_Dwo.rpt";
+            cr.Load(Crypath);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+
+
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "MenuItem_QuickBite");
+
         }
     }
 }

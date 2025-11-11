@@ -348,8 +348,6 @@
                             <div class="mb-3">
                                 <i class="bi bi-cup-hot-fill" style="font-size: 2.5rem;"></i>
                             </div>
-                            <asp:Button ID="rept1" runat="server" Text="Report" OnClick="rept1_Click" />
-                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                             <h2>Create Account</h2>
                             <p class="mb-0">Join QuickBite and start ordering delicious meals</p>
                         </div>

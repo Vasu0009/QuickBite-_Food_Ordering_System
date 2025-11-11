@@ -69,31 +69,12 @@ namespace QuickBite__Food_Ordering_System
 
         }
 
-        protected void rept1_Click(object sender, EventArgs e)
-        {
-            
+       
 
-
-            getcon();
-            da = new SqlDataAdapter("select * from register_tbl", con);
-            ds = new DataSet();
-            da.Fill(ds);
-            string xml = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/User.xml";
-            ds.WriteXmlSchema(xml);
-
-            Crypath = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/user_data.rpt";
-            cr.Load(Crypath);
-            cr.SetDataSource(ds);
-            cr.Database.Tables[0].SetDataSource(ds);
-            cr.Refresh();
-            CrystalReportViewer1.ReportSource = cr;
-
-
-            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "UserData");
 
            
 
-        }
+        
     }
 }
 

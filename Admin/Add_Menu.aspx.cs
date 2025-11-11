@@ -43,6 +43,8 @@ namespace QuickBite__Food_Ordering_System.Admin
             {
                 fillCategory();
                 BindMenuItems();
+                CrystalReportViewer1.Visible = false;
+
             }
         }
 
@@ -179,6 +181,28 @@ namespace QuickBite__Food_Ordering_System.Admin
         {
             Session["admin"] = null;
             Response.Redirect("LoginAdmin.aspx");
+        }
+
+        protected void btnReport_Click(object sender, EventArgs e)
+        {
+            getcon();
+            da = new SqlDataAdapter("select * from Add_MenuItems", con);
+            ds = new DataSet();
+            da.Fill(ds);
+            string xml = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/MenuItem_Report.xml";
+            ds.WriteXmlSchema(xml);
+
+
+            Crypath = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/MenuItem.rpt";
+            cr.Load(Crypath);
+            cr.SetDataSource(ds);
+            cr.Database.Tables[0].SetDataSource(ds);
+            cr.Refresh();
+            CrystalReportViewer1.ReportSource = cr;
+
+
+            cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "MenuItem_Report");
+
         }
     }
 }

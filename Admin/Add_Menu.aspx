@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/admin.Master" AutoEventWireup="true" CodeBehind="Add_Menu.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Admin.Add_MenuAdmin" %>
+
 <%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -36,6 +37,9 @@
                             <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#menuModal" onclick="clearForm()">
                                 <i class="bi bi-plus-circle me-1"></i>Add Menu Item
                             </button>
+                            <asp:Button ID="btnReport" runat="server" Text="Generate Report" OnClick="btnReport_Click"  />
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+
                         </div>
                     </div>
 

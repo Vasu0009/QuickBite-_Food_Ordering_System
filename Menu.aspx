@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/QuickBite.Master" AutoEventWireup="true" CodeBehind="Menu.aspx.cs" Inherits="QuickBite__Food_Ordering_System.Menu" %>
 
+<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" runat="server" ContentPlaceHolderID="ContentPlaceHolder3">
@@ -56,46 +58,7 @@
             </div>
         </div>
     </footer>
-    <%--<!-- Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1">
-           <h5 class="modal-title fw-bold text-dark"><i class="bi bi-cart3 me-2"></i>Shopping Cart </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal">
-                    </button>
-                </div>
-                <div class="modal-body p-0">
-                    <div id="cart-items" class="cart-items-container" style="max-height: 400px; overflow-y: auto;">
-                        <!-- Cart items will be populated here -->
-                    </div>
-                    <div id="cart-empty" class="text-center py-5 px-4">
-                        <div class="empty-cart-icon mb-4">
-                            <i class="bi bi-cart3 text-muted" style="font-size: 3rem; opacity: 0.3;"></i>
-                        </div>
-                        <h5 class="text-muted mb-3">Your cart is empty</h5>
-                        <p class="text-muted mb-4">
-                            Add some delicious items to get started!
-                        </p>
-                        <a href="Menu.aspx" class="btn btn-warning"><i class="bi bi-shop me-2"></i>Browse Menu </a>
-                    </div>
-                </div>
-                <div class="modal-footer bg-light">
-                    <div class="d-flex justify-content-between align-items-center w-100">
-                        <div class="cart-total">
-                            <span class="h5 fw-bold text-dark">Total: ₹<span id="cart-total">0</span></span>
-                        </div>
-                        <div>
-                            <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal">
-                                Continue Shopping
-                            </button>
-                            <button type="button" class="btn btn-warning fw-bold" onclick="checkout()" id="checkout-btn" style="display: none;">
-                                <i class="bi bi-credit-card me-2"></i>Checkout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    --%>
+   
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
@@ -161,6 +124,8 @@
                 <input type="text" id="menuSearch" class="form-control search-input" placeholder="Search for dishes..." onkeyup="searchMenuItems()">
             </div>
         </div>
+      
+      
     </div>
 
     <div class="container">
@@ -225,6 +190,8 @@
             <!-- Prev & Next buttons aligned -->
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <asp:ImageButton ID="prebtn" ImageUrl="~/assets/images/Previus_btn.png" runat="server" AlternateText="Previous" Height="70px" Width="100px" OnClick="prebtn_Click1" />
+                <asp:Button ID="reportbtn" runat="server" Text="MenuItem Download" OnClick="reportbtn_Click" />
+                <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                 <asp:ImageButton ID="nextbtn" ImageUrl="~/assets/images/Next_btn.png" runat="server" AlternateText="Next" Height="70px" Width="100px" OnClick="nextbtn_Click1" />
             </div>
         </div>

@@ -83,31 +83,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="card mt-4">
-                        <div class="card-header">Recent Orders</div>
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-striped mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Customer</th>
-                                            <th>Total</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="recentOrdersBody">
-                                        <tr>
-                                            <td colspan="5" class="text-center text-muted">No orders yet</td>
-                                                     
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
                 </main>
             </div>
         </div>

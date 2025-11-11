@@ -85,9 +85,6 @@
 <%--                <asp:Button ID="btnUpd" runat="server" Text="Update Cart" OnClick="CalculateFinalTotal" />--%>
                 <asp:Button ID="btnUpd" runat="server" Text="Update Cart" OnClick="btnUpd_Click1" />
                 <asp:Button ID="btnchkOut" runat="server" Text="Check Out" OnClick="btnchkOut_Click" />
-<%--                <asp:Button ID="btnUpd" runat="server" Text="Update Cart" OnClick="CalculateFinalTotal" />--%>
-                <asp:Button ID="btnUpd" runat="server" Text="Update Cart" OnClick="btnUpd_Click1" />
-                <asp:Button ID="btnchkOut" runat="server" Text="Check Out" OnClick="btnchkOut_Click" />
                 <br /><br />
                 <asp:Label ID="lblFinalTotal" runat="server" Text="" CssClass="h4 text-dark"></asp:Label>
             </div>

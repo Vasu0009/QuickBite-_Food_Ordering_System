@@ -45,7 +45,8 @@
                             <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="clearForm()">
                                 <i class="bi bi-plus-circle me-1"></i>Add Category
                             </button>
-                            
+                            <asp:Button ID="btnReport" runat="server" Text="Generate Report" OnClick="btnReport_Click" />
+                            <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                         </div>
                     </div>
 
@@ -104,8 +105,6 @@
                             </div>
                         </div>
                     </div>
-
-                    
 
                     <!-- Add/Edit Category Modal -->
                     <div class="modal fade" id="categoryModal" tabindex="-1" aria-hidden="true">
