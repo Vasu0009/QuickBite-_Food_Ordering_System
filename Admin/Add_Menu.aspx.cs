@@ -44,14 +44,13 @@ namespace QuickBite__Food_Ordering_System.Admin
                 fillCategory();
                 BindMenuItems();
                 CrystalReportViewer1.Visible = false;
-
             }
         }
 
         void clear()
         {
             txtName.Text = "";
-            ddlCategory.SelectedIndex = -1;
+            ddlCategory.SelectedIndex = 0;
             txtPrice.Text = "";
             txtDescription.Text = "";
         }
@@ -62,6 +61,13 @@ namespace QuickBite__Food_Ordering_System.Admin
             {
                 fnm = "../MenuImg/" + fldimg.FileName;
                 fldimg.SaveAs(Server.MapPath(fnm));
+            }
+            else
+            {
+                if (ViewState["oldimg"] != null)
+                {
+                    fnm = ViewState["oldimg"].ToString();
+                }
             }
         }
 
@@ -104,6 +110,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 txtName.Text = ds.Tables[0].Rows[0]["Name"].ToString();
                 txtPrice.Text = ds.Tables[0].Rows[0]["Price"].ToString();
                 txtDescription.Text = ds.Tables[0].Rows[0]["Description"].ToString();
+                ViewState["oldimg"] = ds.Tables[0].Rows[0]["Image"].ToString();
 
                 string categoryId = ds.Tables[0].Rows[0]["CategoryId"].ToString();
                 da = new SqlDataAdapter("SELECT Name FROM Add_Category WHERE CategoryId='" + categoryId + "'", con);
@@ -112,13 +119,19 @@ namespace QuickBite__Food_Ordering_System.Admin
 
                 if (dsCategory.Tables[0].Rows.Count > 0)
                 {
-                    ddlCategory.SelectedItem.Text = dsCategory.Tables[0].Rows[0]["Name"].ToString();
+                    ddlCategory.SelectedValue = dsCategory.Tables[0].Rows[0]["Name"].ToString();
                 }
             }
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (ddlCategory.SelectedIndex == 0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "alert('Please select category.'); var modal = new bootstrap.Modal(document.getElementById('menuModal')); modal.show();", true);
+                return;
+            }
+
             if (btnSave.Text == "Save Item")
             {
                 getcon();
@@ -149,11 +162,20 @@ namespace QuickBite__Food_Ordering_System.Admin
 
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            getcon();
             da = new SqlDataAdapter("SELECT CategoryId FROM Add_Category WHERE Name='" + ddlCategory.SelectedItem.ToString() + "'", con);
             ds = new DataSet();
             da.Fill(ds);
 
-            ViewState["cid"] = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                ViewState["cid"] = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            }
+
+            if (btnSave.Text == "Save Item" || btnSave.Text == "Update Item")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "openModal", "var modal = new bootstrap.Modal(document.getElementById('menuModal')); modal.show();", true);
+            }
         }
 
         protected void gvMenuItems_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -192,7 +214,6 @@ namespace QuickBite__Food_Ordering_System.Admin
             string xml = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/MenuItem_Report.xml";
             ds.WriteXmlSchema(xml);
 
-
             Crypath = @"E:/SEM-5/ASP.NET/QuickBite _Food_Ordering_System/MenuItem.rpt";
             cr.Load(Crypath);
             cr.SetDataSource(ds);
@@ -200,9 +221,7 @@ namespace QuickBite__Food_Ordering_System.Admin
             cr.Refresh();
             CrystalReportViewer1.ReportSource = cr;
 
-
             cr.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, true, "MenuItem_Report");
-
         }
     }
 }

@@ -190,7 +190,7 @@
         </div>
     </section>
 
-    <!-- Popular Dishes Preview -->
+   <!-- Popular Dishes Preview -->
     <section class="py-5">
         <div class="container">
             <div class="row text-center mb-5">
@@ -240,7 +240,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-4">
+       <div class="row mt-4">
                 <div class="col-12 text-center">
                     <a href="Menu.aspx" class="btn btn-warning btn-lg">View Full Menu</a>
                 </div>

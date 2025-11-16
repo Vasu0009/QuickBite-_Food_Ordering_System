@@ -31,7 +31,7 @@
                     </div>
                 </aside>
 
-                <!-- Main content -->
+             
                 <main class="col-md-9 col-lg-10 ms-sm-auto px-4 py-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h1 class="h4 mb-0">Orders</h1>
@@ -39,7 +39,7 @@
                         <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
                     </div>
 
-                    <!-- Message Label -->
+                   
                     <asp:Label ID="lblMessage" runat="server" CssClass="text-danger fw-bold"></asp:Label>
 
                     <div class="card mt-3">

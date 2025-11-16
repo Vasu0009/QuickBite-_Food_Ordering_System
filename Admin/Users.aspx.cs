@@ -63,7 +63,7 @@ namespace QuickBite__Food_Ordering_System.Admin
             gvUsers.DataSource = ds.Tables[0];
             gvUsers.DataBind();
             lblTotalUsers.Text = "Total Users: " + ds.Tables[0].Rows.Count.ToString();
-            con.Close();
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -73,13 +73,7 @@ namespace QuickBite__Food_Ordering_System.Admin
             Response.Redirect("LoginAdmin.aspx");
         }
 
-        protected void btnRefresh_Click(object sender, EventArgs e)
-        {
-            BindUsersGrid();
-            lblMessage.CssClass = "alert alert-success";
-            lblMessage.Text = "Users list refreshed successfully!";
-            pnlMessage.Visible = true;
-        }
+     
 
         protected void gvUsers_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -101,7 +95,7 @@ namespace QuickBite__Food_Ordering_System.Admin
                 lblMessage.Text = "Failed to delete user.";
                 pnlMessage.Visible = true;
             }
-            con.Close();
+            
         }
 
         protected void gvUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)

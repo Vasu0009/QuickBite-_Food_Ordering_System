@@ -38,7 +38,6 @@
                             <asp:Label ID="lblTotalUsers" runat="server" CssClass="badge bg-primary fs-6" Text="Total Users: 0"></asp:Label>
                             <asp:Button ID="btnReport" runat="server" Text="Report" OnClick="btnReport_Click" />
                             <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
-                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" CssClass="btn btn-sm btn-outline-primary" OnClick="btnRefresh_Click" />
                         </div>
                     </div>
                     

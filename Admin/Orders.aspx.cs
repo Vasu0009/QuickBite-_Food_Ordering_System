@@ -78,12 +78,12 @@ namespace QuickBite__Food_Ordering_System.Admin
                 {
                     lblMessage.Text = "Failed to delete order.";
                 }
+
             if (Session["admin"] == null)
             {
                 Response.Redirect("LoginAdmin.aspx");
             }
 
-                con.Close();
             }
         }
 
@@ -91,7 +91,6 @@ namespace QuickBite__Food_Ordering_System.Admin
         {
             Session.Clear();
             Session.Abandon();
-            Response.Redirect("../Login.aspx");
             Response.Redirect("LoginAdmin.aspx");
         }
 

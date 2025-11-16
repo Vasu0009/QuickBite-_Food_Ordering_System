@@ -122,7 +122,6 @@
     <Content Include="Admin\LoginAdmin.aspx" />
     <Content Include="Admin\Orders.aspx" />
     <Content Include="Admin\Reports.aspx" />
-    <Content Include="Admin\Settings.aspx" />
     <Content Include="Admin\Users.aspx" />
     <Content Include="App_Data\User.mdf" />
     <Content Include="App_Data\User_log.ldf">
@@ -234,13 +233,6 @@
     </Compile>
     <Compile Include="Admin\Reports.aspx.designer.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\Settings.aspx.cs">
-      <DependentUpon>Settings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\Settings.aspx.designer.cs">
-      <DependentUpon>Settings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Users.aspx.cs">
       <DependentUpon>Users.aspx</DependentUpon>

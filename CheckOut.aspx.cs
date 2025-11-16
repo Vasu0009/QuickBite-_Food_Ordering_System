@@ -104,7 +104,7 @@ namespace QuickBite__Food_Ordering_System
 
             int uid = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
 
-            // 2. Get cart items with CAST
+            // 2. Get cart items 
             da = new SqlDataAdapter("SELECT *, (C_Menu_Price * C_Menu_Quant) AS Total FROM MenuCart_tbl WHERE User_Cart_Id='" + uid + "'", con);
             ds = new DataSet();
             da.Fill(ds);
@@ -126,7 +126,7 @@ namespace QuickBite__Food_Ordering_System
             lblSubtotal.Text = "₹" + subtotal.ToString("0.00");
             lblTotalAmount.Text = "₹" + subtotal.ToString("0.00");
 
-            // 4. Insert Order_tbl
+            // 4. Insert Order
             string shippingAddress = txtAddress.Text.Trim() + ", " + txtCity.Text.Trim() + ", " + txtState.Text.Trim() + " - " + txtPincode.Text.Trim();
             string billingAddress = txtBillAddress.Text.Trim() + ", " + txtBillCity.Text.Trim() + ", " + txtBillState.Text.Trim() + " - " + txtBillPincode.Text.Trim();
             string paymentMethod = rblPaymentMethod.SelectedValue;
